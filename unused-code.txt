@@ -1,0 +1,34 @@
+//basic grid creator 
+// function gridMaker(w,h){
+//     for(let r=0; r<h;r++){
+//         const row = $('<div></div>');
+//         row.attr('class','row')
+//         row.attr('id',`row${r}`)
+//         for(let c=0;c<w;c++){
+//             const cell = $('<div></div>')
+//             cell.addClass('cell');
+//             cell.attr('id',`cell${c}`);
+//             cell.attr('x', c);
+//             cell.attr('y',r);
+//             cell.css('border',"solid 0 lightgray")
+//             cell.css('width','25px');
+//             cell.css('height','25px');
+//             tileCounter+=1;
+//             if (tileCounter%7===1){
+//                 cell.css('background-color',"gray");
+//             } else if (tileCounter%5===1){
+//                 cell.css('background-color',"lightgray");
+//             } else { cell.css('background-color',"darkgray");
+//             }
+//             row.append(cell);
+//             }
+//     $('#fillTile').append(row);
+// }
+// }
+//simple function to create a string of maps 
+// const fill = (num) =>{
+//     for (let i=0;i<num;i++){
+//         gridMaker(10,10);
+//      }
+// }
+// fill(1);
