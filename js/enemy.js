@@ -1,52 +1,55 @@
 const enemy = class {
-    constructor(type, hp ,color, r,c) {
+    constructor(type, hp ,color,r,c) {
         this.name = type;
         this.heart = hp;
         this.armor = 2;
         this.speed = 1;
         this.color = color;
         this.x = c; 
-        this.y = r; 
-        this.origin =[r,c];
-        this.currentDirection = ""; 
-        this.populate();
-        this.choosePath();
+        this.y = r;
+        this.origin =[r,c]; // was going to be used for a patrol function;
+        this.direction = ""; 
+        this.position;
     }
-    populate(){
-        const monster = $(`<div class="cell enemy" id=${this.name}></div>`);
-        monster.attr('x',this.x);
-        monster.attr('y',this.y);
-        console.log(monster);
-        $(`#cell_${this.y}_${this.x}`).addClass('enemy');
-        this.render();
-        // return this.choosePath(this.origin[0],this.origin[1])
+    populate(x,y){
+        $(`#cell_${y}_${x}`).addClass('enemy');
     }
     attack(){
-        console.log(`${this.name}attacks!`);
-        //create attack object  
+        console.log(`${this.name}attacks!`); 
       }; 
-    choosePath(){
+    choosePath(){ 
         const options = ["up","down","left","right"];
         const path = options[Math.floor(Math.random()*options.length)];
-        console.log(`I am choosing ${path}`);
-        this.currentDirection = path; 
-        this.render();  
+        this.direction = path; 
+        this.move();
     };
     move(){
-
+        if (this.direction === "up" && this.y>0 ){   
+            if($(`#cell_${this.y-1}_${this.x}`).hasClass('wall')===true) {
+            } else{
+                this.y--}     
+        } else if (this.direction === "down" && this.y<12){
+            if($(`#cell_${this.y+1}_${this.x}`).hasClass('wall')===true) {
+            } else{
+                this.y++}       
+        }else if (this.direction === "left" && this.x>0){
+            if($(`#cell_${this.y}_${this.x-1}`).hasClass('wall')===true) {
+            } else{
+                this.x--}          
+        }else if (this.direction === "right" && this.x<12){
+            if($(`#cell_${this.y}_${this.x+1}`).hasClass('wall')===true) {
+            } else{
+                this.x++}
+        } 
+        this.render();
+        this.position = [this.y,this.x]
+        return this.position;   
     };
     render(){
         $( "div").removeClass("enemy");
         $(`#cell_${this.y}_${this.x}`).addClass("enemy");
-        this.choosePath(); // every time if(gameClock%97===0) it moves it should call 'render' and then choose a new path 
     };
          
-}
-
-//type, hp ,color, r,c
-// const goblin = new enemy("goblin",2,"green",5,3);
-// setTimeout(goblin.choosePath, 1000); 
-
-
+};
 
 // $player.attr('draggable','true'); https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/ondragstart

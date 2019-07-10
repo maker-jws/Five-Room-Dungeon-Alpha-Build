@@ -1,4 +1,6 @@
 let timer;
+let counter=1;
+
 const gameClock =  {
     minute: 0,
     second: 0,
@@ -18,7 +20,6 @@ const gameClock =  {
         console.log('game over');
         clearInterval(timer);
         alert('time has run out');
-        //run endGame State
       } else {}
 }
 }
@@ -28,16 +29,20 @@ function startGame(){
     $(`#grid-holder2`).append($startClock);
     $('#start').click( function () {
         $startClock.remove();
+           
         $(`#grid-holder2`).append($timerDisplay)
         const timer = setInterval(function(){
             gameClock.changeClock(99);
+            counter++;
+            if (counter%500===0){
+                goblin.choosePath();
+            }
             },1);
             return timer;   
         }
-    ); 
-    player.populate("buddy",2,10);
-    const goblin = new enemy("goblin",2,"green",5,3);
-    goblin.choosePath();
+    );    
 }
-
 startGame(); // put listener on opening page html;
+player.populate("buddy",2,10);
+const goblin = new enemy("goblin",2,"green",5,3);
+let playerPosition = [player.y,player.x]; // currently only printing the value 

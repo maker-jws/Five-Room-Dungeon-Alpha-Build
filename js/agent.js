@@ -1,3 +1,4 @@
+
 const player = {
     name: "",
     torch: 5,
@@ -9,56 +10,52 @@ const player = {
     x: 0, 
     y: 0,
     direction: "",
-    
     populate: function(alias, r, c){
         this.name = alias;
-        const $player = $(`<div class="cell player" id=${this.name}></div>`);
         this.y = r;
         this.x = c;
-        $player.attr('y', r);
-        $player.attr('x', c);
-        $(`#cell_${this.y}_${this.x}`).addClass('player');
+        const playerDiv = $(`<div class="player" id=${alias} y=${this.y} x=${this.x}></div>`);
+        $(`#cell_${this.x}_${this.y}`).append(playerDiv);
+        $(`#cell_${r}_${c}`).addClass('player');
         console.log(`${this.name} joined the game`)
     },
-    
     render(){
         $( "div" ).removeClass( "player" );
         $(`#cell_${this.y}_${this.x}`).addClass('player');
+        console.log(this.y,this.x);
     },
+
     move: function(){
         if (this.direction === "up" && this.y>0 ){   
             if($(`#cell_${this.y-1}_${this.x}`).hasClass('wall')===true) {
                 console.log('you inspect the wall');
             } else{
                 this.y--    
-                this.render();
             }     
         } else if (this.direction === "down" && this.y<12){
             if($(`#cell_${this.y+1}_${this.x}`).hasClass('wall')===true) {
                 console.log('you inspect the wall');
             } else{
                 this.y++    
-                this.render();
             }       
         }else if (this.direction === "left" && this.x>0){
             if($(`#cell_${this.y}_${this.x-1}`).hasClass('wall')===true) {
                 console.log('you inspect the wall');
             } else{
                 this.x--    
-                this.render();
             }          
         }else if (this.direction === "right" && this.x<12){
             if($(`#cell_${this.y}_${this.x+1}`).hasClass('wall')===true) {
                 console.log('you inspect the wall');
             } else{
                 this.x++    
-                this.render();
+                
             }    
-        } 
+        }
+        this.render();
+        return playerPosition = [player.y,player.x] 
     }   
 }
-// player.populate("buddy",2,10);
-// console.log(player)
 
 //listener for player
 $('body').keydown(function(e){
@@ -72,7 +69,6 @@ $('body').keydown(function(e){
     } else if (direction === 68) {
         player.direction="right"; 
     } else {
-        console.log('this is not a direction')
     }
     player.move();
 });
