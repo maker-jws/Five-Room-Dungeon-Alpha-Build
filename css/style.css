@@ -4,20 +4,19 @@
   height: 50px;
 }
 .cell{
-  width: 60px; 
-  height: 60px;
-  border: .05em solid rgba(0,0,0,1);
+  width: 25px; 
+  height: 25px;
+  border: 1px solid rgba(0,0,0,.1);
   /* zoom can be added by changing size of pixels 
     after Battle Map redrawn
   */
-
 }
 .door{
   background-color: lightblue;
 }
 .wall{
   background-color: black;
-  /* box-shadow: -10px -10px 30px rgba(0, 0, 0, 0.2), 10px 10px 30px rgba(0, 0, 0, 0.2); */
+  /*  */
 }
 .treasure{
   background-color: goldenrod;             
@@ -37,6 +36,7 @@
   background-color: green;
   border-radius: 50%;
   z-index: 2;
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
 }
 
 .enemy{
@@ -45,37 +45,29 @@
   border: 1px dashed white;
 }
 
-/* .arrow-up {
-    width: 25px; 
-    height: 25px; 
+ .arrow-up {
+
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-bottom: 1px solid black;
   }
   
-  .arrow-down {
-    width: 25px; 
-    height: 25px; 
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
+  .arrow-down { 
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
     
     border-top: 1px solid #f00;
   }
   
   .arrow-right {
-    width: 25px; 
-    height: 25px; 
     border-top: 6px solid transparent;
     border-bottom: 6px solid transparent;
     
     border-left: 1px solid green;
   }
   
-  .arrow-left {
-    width: 25px; 
-    height: 25px;  
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent; 
-    
+  .arrow-left {  
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent; 
     border-right:1px solid blue; 
-  } */
+  } 
