@@ -10,21 +10,27 @@ const player = {
     x: 0, 
     y: 0,
     direction: "",
-    populate: function(alias, r, c){
+    checkHealth: function (){
+
+    },
+    populate: function(alias, r, c){ 
         this.name = alias;
         this.y = r;
         this.x = c;
-        const playerDiv = $(`<div class="player" id=${alias} y=${this.y} x=${this.x}></div>`);
-        $(`#cell_${this.x}_${this.y}`).append(playerDiv);
+        // const playerDiv = $(`<div class="player" id=${alias} y=${this.y} x=${this.x}></div>`); // player
         $(`#cell_${r}_${c}`).addClass('player');
         console.log(`${this.name} joined the game`)
     },
     render(){
         $( "div" ).removeClass( "player" );
-        $(`#cell_${this.y}_${this.x}`).addClass('player');
-        console.log(this.y,this.x);
+        if(!$(`#cell_${this.y}_${this.x}`).hasClass('wall')){
+            $(`#cell_${this.y}_${this.x}`).addClass('player');
+            console.log(this.y,this.x);
+        } else {
+            $(`#cell_${this.y+1}_${this.x+1}`).addClass('player')
+        }  
     },
-
+    
     move: function(){
         if (this.direction === "up" && this.y>0 ){   
             if($(`#cell_${this.y-1}_${this.x}`).hasClass('wall')===true) {
@@ -52,6 +58,9 @@ const player = {
                 
             }    
         }
+
+        //interrupt with options for addInventory or moveMap or Move tunnel 
+
         this.render();
         return playerPosition = [player.y,player.x] 
     }   

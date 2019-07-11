@@ -1,5 +1,6 @@
 let timer;
 let counter=1;
+let timeOut = false;
 
 const gameClock =  {
     minute: 0,
@@ -10,16 +11,15 @@ const gameClock =  {
        $(`#ms`).text(` milliseconds: ${gameClock.ms} `)
        $(`#second`).text(`seconds: ${gameClock.second} `);
        $(`#minute`).text(`minutes: ${gameClock.minute}`); 
-        if (this.ms >= 100){
+       if (this.ms >= 100){
        this.ms=0;
        this.second++;
       } else if (this.second>59){
         this.second = 0;
         this.minute++;
       } else if (this.minute>end){
-        console.log('game over');
-        clearInterval(timer);
-        alert('time has run out');
+        timeOut = true;
+        endGame();
       } else {}
 }
 }
@@ -28,21 +28,43 @@ function startGame(){
     const $timerDisplay = $("<div class=clock id=display> <span class=clock id=minute> 00 </span> <span class=clock id=second> XX </span> <span class=clock id=ms >XX</span></div>");
     $(`#grid-holder2`).append($startClock);
     $('#start').click( function () {
+        displayMap();
+        console.log(mapPack);
+        console.log(doorLocations);
+        player.populate("buddy",2,10); 
         $startClock.remove();
-           
         $(`#grid-holder2`).append($timerDisplay)
         const timer = setInterval(function(){
             gameClock.changeClock(99);
             counter++;
-            if (counter%500===0){
-                goblin.choosePath();
-            }
+            //controls monster movement 
+            if (counter%300===0){
+                for(let i=0;i<gameEnemies.length;i++){
+                    // gameEnemies[i].choosePath();
+                    // console.log(gameEnemies[i].direction);
+                } 
+                } //if statement for check player alive after an attack is made () 
             },1);
             return timer;   
         }
     );    
 }
-startGame(); // put listener on opening page html;
-player.populate("buddy",2,10);
-const goblin = new enemy("goblin",2,"green",5,3);
-let playerPosition = [player.y,player.x]; // currently only printing the value 
+
+function endGame(){
+    console.log('game over');
+    clearInterval(timer);
+    //clear map()
+    //create modal with current time - 
+    //reason for game over 
+        if  (timeOut === true){
+            alert('time has run out');
+        } else if (player.hp<0){
+            alert('Your player has succumb to their injuries');
+        } 
+        
+};
+
+startGame();
+
+createMonsters();
+

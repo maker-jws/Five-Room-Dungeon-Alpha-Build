@@ -1,4 +1,19 @@
 /* css Tricks: triangles: */
+/* rgba(200,200,250,.1)
+rgba(104, 252, 252, 0.5)
+rgba(30, 105, 190, 0.5) */
+#wrapper{
+  background: repeating-linear-gradient(180deg, darkgray 0% , lightgray 18%, red  100%);
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 100vh;
+}
+#game-space{
+  overflow: initial;
+}
+#grid-holder2{
+  background-color: lightgray;
+}
 .battlemap{
   width: 50px; 
   height: 50px;
@@ -40,9 +55,8 @@
 }
 
 .enemy{
-  background-color: magenta;
   border-radius: 30%;
-  border: 1px dashed white;
+  border: .5px solid magenta;
 }
 
  .arrow-up {
