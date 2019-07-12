@@ -1,4 +1,3 @@
-
 const player = {
     name: "",
     torch: 5,
@@ -34,16 +33,16 @@ const player = {
                 console.log('you inspect the wall');
             } else if($(`#cell_${this.map}_${this.y-1}_${this.x}`).hasClass('door')===true){
                 this.y--
-                findMatch();    
+                //check if locked
             } else{
                 this.y--    
             }     
-        } else if (this.direction === "down" && this.y<12){
+        } else if (this.direction === "down" && this.y<rows){
             if($(`#cell_${this.map}_${this.y+1}_${this.x}`).hasClass('wall')===true) {
                 console.log('you inspect the wall');
             } else if($(`#cell_${this.map}_${this.y+1}_${this.x}`).hasClass('door')===true){
                 this.y++ 
-                findMatch();
+                //check if locked
             } else{
                 this.y++    
             }       
@@ -52,24 +51,22 @@ const player = {
                 console.log('you inspect the wall');
             } else if($(`#cell_${this.map}_${this.y}_${this.x-1}`).hasClass('door')===true){
                 this.x--
-                findMatch();
+                //check if locked
             }
             else{
                 this.x--    
             }          
-        }else if (this.direction === "right" && this.x<12){
+        }else if (this.direction === "right" && this.x<columns){
             if($(`#cell_${this.map}_${this.y}_${this.x+1}`).hasClass('wall')===true) {
                 console.log('you inspect the wall');
             }else if($(`#cell_${this.map}_${this.y}_${this.x+1}`).hasClass('door')===true){
                 this.x++ 
-                findMatch();
+                //check if locked
             } else{
                 this.x++    
                 
             }    
         }
-
-       
         console.log(player.map,player.y,player.x);
         this.render();
     }   
