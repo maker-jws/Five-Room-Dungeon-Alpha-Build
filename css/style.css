@@ -4,22 +4,35 @@ rgba(104, 252, 252, 0.5)
 rgba(30, 105, 190, 0.5) */
 
 body{
+  font-size: 0;
+  margin: auto;
+  padding: 0;
+}
+#wrapper{
   background: linear-gradient(180deg, darkgray 0% , lightgray 18%, red  100%);
   height: 100vh;
   margin:0;
+  font-size: 18px;
 }
-#wrapper{
-  background-repeat: no-repeat;
-  background-size: cover;
-  overflow: initial;
+h1{
+  font-size: 1.75em;
+  
 }
-#grid-holder0, #grid-holder1, #grid-holder2{
-  margin: 25px;
+#start{
+  font-size: 1em;
+}
+#display{
+  font-size: 1em;
+}
+#grid-holder0{
+  background-color: lightgray;
 }
 #game-space{
-  box-sizing: border-box;
-  background-color: lightgray;
-  width: auto;
+  border: 1px, red, solid;
+  background-repeat: no-repeat;
+  overflow: initial;
+  background-size: cover;
+  margin-top: .2em;
 }
 /* .battlemap{
   width: 50px; 
@@ -30,9 +43,7 @@ body{
   width: 25px; 
   height: 25px;
   border: 1px solid rgba(0,0,0,.1);
-  /* zoom can be added by changing size of pixels 
-    after Battle Map redrawn
-  */
+  
 }
 .door{
   background-color: lightblue;

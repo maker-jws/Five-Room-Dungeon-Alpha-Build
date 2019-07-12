@@ -8,7 +8,7 @@ const gameClock =  {
     ms: 0,
     changeClock: function(end){
        this.ms++
-       $(`#ms`).text(` milliseconds: ${gameClock.ms} `)
+    //    $(`#ms`).text(` milliseconds: ${gameClock.ms} `)
        $(`#second`).text(`seconds: ${gameClock.second} `);
        $(`#minute`).text(`minutes: ${gameClock.minute}`); 
        if (this.ms >= 100){
@@ -25,8 +25,8 @@ const gameClock =  {
 }
 function startGame(){
     const $startClock = $("<button class=clock id=start>Start Game</button>");
-    const $timerDisplay = $("<div class=clock id=display> <span class=clock id=minute> 00 </span> <span class=clock id=second> XX </span> <span class=clock id=ms >XX</span></div>");
-    $(`#grid-holder2`).append($startClock);
+    const $timerDisplay = $("<div class=clock id=display> <span class=clock id=minute> 00 </span> <span class=clock id=second> XX </span></div>");
+    $(`#startButton`).append($startClock);
     $('#start').click( function () {
         parseMap();
         player.populate("buddy",0,6,1);  
@@ -38,7 +38,7 @@ function startGame(){
             //controls monster movement 
             if (counter%300===0){
                 for(let i=0;i<gameEnemies.length;i++){
-                    // gameEnemies[i].choosePath();
+                    gameEnemies[i].choosePath();
                     // console.log(gameEnemies[i].direction);
                 } 
                 } //if statement for check player alive after an attack is made () 

@@ -4,20 +4,27 @@ statArray = [
     {name:"goblin", 
     hp:2, 
     color:"lightgreen",
-    cell: 5,
-    row:1}
+    cell: 21,
+    row:19,
+    map:0
+    }
     ,
     {name:"hobgoblin",
      hp:3,
      color: "brown",
-     cell: 5,
-     row:2},
+     cell: 21,
+     row:20,
+     map:0
+    
+    },
 
      {name:"orc",
       hp:5,
       color:"darkgreen",
-      cell: 5,
-      row:3}
+      cell: 21,
+      row:21,
+      map:0
+    }
     
 ]
 
@@ -30,7 +37,8 @@ class Enemy {
         this.color = stats.color;
         this.x = stats.cell; 
         this.y = stats.row;
-        this.origin =[stats.row,stats.cell]; // was going to be used for a patrol function;
+        this.map = stats.map;
+        this.origin =[stats.map, stats.row,stats.cell]; // was going to be used for a patrol function;
         this.direction = ""; 
         this.position;
         this.render();
@@ -45,33 +53,33 @@ class Enemy {
         this.move();
     };
     move(){
-        $(`#cell_${this.y}_${this.x}`).removeClass(`enemy ${this.name}`);
-        $(`#cell_${this.y}_${this.x}`).attr('style',"");
+        $(`#cell_${this.map}_${this.y}_${this.x}`).removeClass(`enemy ${this.name}`);
+        $(`#cell_${this.map}_${this.y}_${this.x}`).attr('style',"");
         if (this.direction === "up" && this.y>0){   
-            if( $(`#cell_${this.y-1}_${this.x}`).hasClass('wall')===true || $(`#cell_${this.y-1}_${this.x}`).hasClass('enemy')===true){
+            if($(`#cell_${this.map}_${this.y-1}_${this.x}`).hasClass('wall')===true || $(`#cell_${this.map}_${this.y-1}_${this.x}`).hasClass('enemy')===true){
             } else{
                 this.y--}     
         } else if (this.direction === "down" && this.y<12 ){
-            if( $(`#cell_${this.y+1}_${this.x}`).hasClass('wall')===true || $(`#cell_${this.y+1}_${this.x}`).hasClass('enemy')===true) {
+            if( $(`#cell_${this.map}_${this.y+1}_${this.x}`).hasClass('wall')===true || $(`#cell_${this.map}_${this.y+1}_${this.x}`).hasClass('enemy')===true) {
             } else{
                 this.y++}       
         }else if (this.direction === "left" && this.x>0){
-            if($(`#cell_${this.y}_${this.x-1}`).hasClass('wall')===true || $(`#cell_${this.y}_${this.x-1}`).hasClass('enemy')===true) {
+            if($(`#cell_${this.map}_${this.y}_${this.x-1}`).hasClass('wall')===true || $(`#cell_${this.map}_${this.y}_${this.x-1}`).hasClass('enemy')===true) {
             } else{
                 this.x--}          
         }else if (this.direction === "right" && this.x<12){
-            if($(`#cell_${this.y}_${this.x+1}`).hasClass('wall')===true || $(`#cell_${this.y}_${this.x+1}`).hasClass('enemy')===true){
+            if($(`#cell_${this.map}_${this.y}_${this.x+1}`).hasClass('wall')===true || $(`#cell_${this.map}_${this.y}_${this.x+1}`).hasClass('enemy')===true){
             } else{
                 this.x++}
         }
         
         this.render();
-        this.position = [this.y,this.x]
+        this.position = [this.map, this.y,this.x]
         return this.position;   
     };
     render(){
-        $(`#cell_${this.y}_${this.x}`).addClass(`enemy ${this.name}`);
-        $(`#cell_${this.y}_${this.x}`).css("background-color",` ${this.color}`);
+        $(`#cell_${this.map}_${this.y}_${this.x}`).addClass(`enemy ${this.name}`);
+        $(`#cell_${this.map}_${this.y}_${this.x}`).css("background-color",` ${this.color}`);
     };
          
 };
