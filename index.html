@@ -8,36 +8,36 @@
     <link  rel="stylesheet" href="css/style.css">
     <title>5 Room Dungeon Generator</title>
 </head>
-<body >  
-    
-    <div id="wrapper" class="container-fluid">
+<body>  
+    <div >
+    <div class="container-fluid">
         <div class="col align-middle" id="header">
-                <div class='row justify-content-center'><h1 id="title">MAP SCREEN</h1></div>
-                <div class='row justify-content-center' id="startButton"></div>
-                <div class='row justify-content-center' id="timerDisplay"></div>
-                <div class='row justify-content-center'><h5><span>PUT BANNER GRAPHIC HERE</span></h5></div>
+                <div class='row justify-content-center gameContent'><h1 id="title">MAP SCREEN</h1></div>
+                <div class='row justify-content-center gameContent' id="startButton"></div>
+                <div class='row justify-content-center gameContent' id="timerDisplay"></div>
+                <div class='row justify-content-center gameContent'><h5><span>PUT BANNER GRAPHIC HERE</span></h5></div>
         </div>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid" >
         <div class="row justify-content-center" id="game-space">
-                <div class="row">
-                    <div id="grid-holder0"></div>
+                <div class="row justify-content-center" id="wrapper">
+                    <div class="col-sm-7" id="grid-holder0"></div>
                     <div class="col float-sm-right" id="playerCol"> 
-                        <div class="row justify-content-center playerInfo"><span id="playerName">"Name"s INFO</span></div>
-                        <div class="row justify-content-center playerInfo" ><span id="divider"></span></div>
-                        <div class="row justify-content-center playerInfo" ><span id="playerHP">HEART</span></div>
-                        <div class="row justify-content-center playerInfo" ><span id="playerTorch">LIGHT</span></div>
-                        <div class="row justify-content-center playerInfo" ><span id="playerInventory">INV</span></div>
+                        <div class="row justify-content-center playerInfo"><span id="playerName"></span></div>
+                        <div class="row justify-content-center playerInfo" ><span id="playerHP" class="row justify-content-center playerInfo"></span></div>
+                        <div class="row justify-content-center playerInfo" ><span id="playerTorch" class="row justify-content-center playerInfo"></span></div>
+                        <div class="row justify-content-center playerInfo" ><span id="playerInventory"></span></div>
+                        <div class="row justify-content-center playerInfo" id="game-info">
+                                <div class="col-7 game-info-item">Doors:<span id="doorCounter" >X</span></div>
+                                <div class="col-7 game-info-item">Treasure:<span id="treasureCounter" >X</span></div>
+                                <div class="col-7 game-info-item">Player Position:<span id="playerXY" >X</span></div>
+                                <div class="col-7 game-info-item">Monster Names:<span id="enemyName" >X</span></div>
+                            </div>
                     </div>
                 </div>    
           </div>  
     </div>
-    <div class="row justify-content-center" id="game-info">
-        <span>Doors:   </span><span id="doorCounter">X    </span>
-        <span>Treasure:   </span><span id="treasureCounter">X    </span>
-        <span>Player Position:   </span><span id="playerXY">X    </span>
-        <span>Monster Names:   </span><span id="enemyName">X    </span>
-    </div>
+</div>   
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

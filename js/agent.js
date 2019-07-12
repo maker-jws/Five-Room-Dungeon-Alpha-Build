@@ -1,14 +1,16 @@
 const player = {
     name: "",
-    torch: 5,
-    heart: 4,
+    torch: 10,
+    heart: 10,
     armor: 3,
     speed: 1,
+    inventory: ["crumbs"],
     x: 0, 
     y: 0,
     map: 0,
     direction: "",
     attackdir: "",
+    lastLocation: [undefined,undefined],
     checkHealth: function (){
     },
     populate: function(alias, m, r, c){ 
@@ -76,6 +78,16 @@ const player = {
         } else {
             $(`#cell_${this.map}_${this.y+1}_${this.x+1}`).addClass('player')
         }  
+    },
+    displayItems(){
+        for (let h=1;h<=this.heart;h++){
+            const heartBox = $(`<div class="cell heartBox" heartNum ="${h}"></div>`)
+            $(`#playerHP`).append(heartBox); 
+        }
+        for (let t=1;t<=this.torch;t++){
+            const torches = $(`<div class="cell torches" torchNum ="${t}"></div>`)
+            $(`#playerTorch`).append(torches); 
+        }
     },
     interact(){
 

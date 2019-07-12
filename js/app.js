@@ -1,7 +1,8 @@
 let timer;
 let counter=1;
 let timeOut = false;
-$(`#playerCol`).hide();
+
+
 const gameClock =  {
     minute: 0,
     second: 0,
@@ -24,17 +25,26 @@ const gameClock =  {
 }
 }
 
-function displayPlayerInfo(){
-    $(`#playerName`).empty();
-    $(`#playerName`).text(`${player.name} INFO`);
-     
-}
+
 
 function startGame(){
     $(`#playerCol`).hide();
+    $(`#wrapper`).hide();
+    setup();
+    createMonsters();
+}
+
+function displayPlayerInfo(){
+    $(`#playerName`).text(`${player.name}'s Stats`);
+    player.displayItems();
+    $(`#playerInventory`).text(`${player.inventory} in your bag`);   
+}
+
+function setup(){
     const $startClock = $("<button class=clock id=start>Start Game</button>");
     const $timerDisplay = $("<div class=clock id=display> <span class=clock id=minute> 00 </span> <span class=clock id=second> XX </span></div>");
     $(`#startButton`).append($startClock);
+    $(`#wrapper`).show();
     $('#start').click( function () {
         parseMap();
         player.populate("buddy",0,23,1);
@@ -72,6 +82,5 @@ function endGame(){
         
 };
 
-startGame();
-createMonsters();
 
+startGame();
