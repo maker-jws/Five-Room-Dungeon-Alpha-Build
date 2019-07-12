@@ -28,12 +28,12 @@ function startGame(){
     const $timerDisplay = $("<div class=clock id=display> <span class=clock id=minute> 00 </span> <span class=clock id=second> XX </span> <span class=clock id=ms >XX</span></div>");
     $(`#grid-holder2`).append($startClock);
     $('#start').click( function () {
-        displayMap();
+        parseMap();
         console.log(mapPack);
         console.log(doorLocations);
-        player.populate("buddy",2,10); 
+        player.populate("buddy",0,6,1);  
         $startClock.remove();
-        $(`#grid-holder2`).append($timerDisplay)
+        $(`#timerDisplay`).append($timerDisplay)
         const timer = setInterval(function(){
             gameClock.changeClock(99);
             counter++;
@@ -44,8 +44,7 @@ function startGame(){
                     // console.log(gameEnemies[i].direction);
                 } 
                 } //if statement for check player alive after an attack is made () 
-            },1);
-            return timer;   
+            },1); 
         }
     );    
 }

@@ -44,7 +44,6 @@ class Enemy {
         this.direction = path; 
         this.move();
     };
-
     move(){
         $(`#cell_${this.y}_${this.x}`).removeClass(`enemy ${this.name}`);
         $(`#cell_${this.y}_${this.x}`).attr('style',"");
@@ -70,7 +69,6 @@ class Enemy {
         this.position = [this.y,this.x]
         return this.position;   
     };
-
     render(){
         $(`#cell_${this.y}_${this.x}`).addClass(`enemy ${this.name}`);
         $(`#cell_${this.y}_${this.x}`).css("background-color",` ${this.color}`);
