@@ -8,6 +8,7 @@ const player = {
     y: 0,
     map: 0,
     direction: "",
+    attackdir: "",
     checkHealth: function (){
     },
     populate: function(alias, m, r, c){ 
@@ -19,6 +20,55 @@ const player = {
         console.log(`${this.name} joined the game`);
         console.log(this);
     },
+    attack(){
+        var character = this;
+        if (player.direction==="up"){
+            setTimeout(
+            function() { 
+                console.log(`${character.name} attacks at his front`);
+                $(`#cell_${character.map}_${character.y-1}_${character.x}`).addClass('playerAttacked')
+
+        }, 1);
+            setTimeout(function() { console.log(`${character.name} finishes his attack`)
+            $( "div" ).removeClass( "playerAttacked" );
+            }, 100);
+        this.render()   
+            
+        } else if (player.direction==="down"){
+            setTimeout(
+                function() { 
+                    console.log(`${character.name} attacks at his front`);
+                    $(`#cell_${character.map}_${character.y+1}_${character.x}`).addClass('playerAttacked')
+    
+            }, 1);
+                setTimeout(function() { console.log(`${character.name} finishes his attack`)
+                $( "div" ).removeClass( "playerAttacked" );
+                }, 100);
+            this.render()   
+        } else if (player.direction==="left"){
+            setTimeout(
+            function() { 
+                console.log(`${character.name} attacks at his front`);
+                $(`#cell_${character.map}_${character.y}_${character.x-1}`).addClass('playerAttacked')
+
+        }, 1);
+            setTimeout(function() { console.log(`${character.name} finishes his attack`)
+            $( "div" ).removeClass( "playerAttacked" );
+            }, 100);
+        this.render()   
+        } else if (player.direction==="right"){
+            setTimeout(
+                function() { 
+                    console.log(`${character.name} attacks at his front`);
+                    $(`#cell_${character.map}_${character.y}_${character.x+1}`).addClass('playerAttacked')
+    
+            }, 1);
+                setTimeout(function() { console.log(`${character.name} finishes his attack`)
+                $( "div" ).removeClass( "playerAttacked" );
+                }, 100);
+            this.render()   
+        } else {console.log(`${this.name} attacks`);}   
+    },
     render(){
         $( "div" ).removeClass( "player" );
         if(!$(`#cell_${this.map}_${this.y}_${this.x}`).hasClass('wall')){
@@ -26,6 +76,9 @@ const player = {
         } else {
             $(`#cell_${this.map}_${this.y+1}_${this.x+1}`).addClass('player')
         }  
+    },
+    interact(){
+
     },
     move: function(){
         if (this.direction === "up" && this.y>0 ){   
@@ -73,17 +126,23 @@ const player = {
 }
 
 //listener for player
-$('body').keydown(function(e){
-    const direction = event.which;
-    if (direction === 87){
-       player.direction="up"; 
-    } else if (direction === 83) {
+$('body').keypress(function(e){
+    const keyed = event.which;
+    console.log(event.which)
+    if (keyed === 119){
+       player.direction="up";
+       player.move(); 
+    } else if (keyed === 115) {
         player.direction="down"; 
-    } else if (direction === 65) {
-        player.direction="left"; 
-    } else if (direction === 68) {
-        player.direction="right"; 
-    } else {
-    }
-    player.move();
+        player.move();
+    } else if (keyed === 97) {
+        player.direction="left";
+        player.move(); 
+    } else if (keyed === 100) {
+        player.direction="right";
+        player.move();
+    } else if (keyed === 102 ||  keyed === 113 ) {
+        player.attack();
+    } else {}
+    
 });

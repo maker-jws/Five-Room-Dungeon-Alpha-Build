@@ -1,7 +1,7 @@
 let timer;
 let counter=1;
 let timeOut = false;
-
+$(`#playerCol`).hide();
 const gameClock =  {
     minute: 0,
     second: 0,
@@ -9,8 +9,8 @@ const gameClock =  {
     changeClock: function(end){
        this.ms++
     //    $(`#ms`).text(` milliseconds: ${gameClock.ms} `)
-       $(`#second`).text(`seconds: ${gameClock.second} `);
-       $(`#minute`).text(`minutes: ${gameClock.minute}`); 
+       $(`#second`).text(`\t seconds: ${gameClock.second} `);
+       $(`#minute`).text(`\t minutes: ${gameClock.minute}`); 
        if (this.ms >= 100){
        this.ms=0;
        this.second++;
@@ -23,28 +23,39 @@ const gameClock =  {
       } else {}
 }
 }
+
+function displayPlayerInfo(){
+    $(`#playerName`).empty();
+    $(`#playerName`).text(`${player.name} INFO`);
+     
+}
+
 function startGame(){
+    $(`#playerCol`).hide();
     const $startClock = $("<button class=clock id=start>Start Game</button>");
     const $timerDisplay = $("<div class=clock id=display> <span class=clock id=minute> 00 </span> <span class=clock id=second> XX </span></div>");
     $(`#startButton`).append($startClock);
     $('#start').click( function () {
         parseMap();
-        player.populate("buddy",0,6,1);  
+        player.populate("buddy",0,23,1);
+        $(`#playerCol`).show();
+        $(`#timerDisplay`).append($timerDisplay); 
+        displayPlayerInfo()
         $startClock.remove();
-        $(`#timerDisplay`).append($timerDisplay)
+        
         const timer = setInterval(function(){
             gameClock.changeClock(99);
             counter++;
-            //controls monster movement 
-            if (counter%300===0){
+            if (counter%66===0){
                 for(let i=0;i<gameEnemies.length;i++){
-                    gameEnemies[i].choosePath();
-                    // console.log(gameEnemies[i].direction);
-                } 
-                } //if statement for check player alive after an attack is made () 
-            },1); 
-        }
-    );    
+                    setTimeout(function(){ 
+                        // gameEnemies[i].choosePath();
+                        },30);  
+                    }
+            }
+            },1);}    
+    );
+    return timer;    
 }
 
 function endGame(){
@@ -62,6 +73,5 @@ function endGame(){
 };
 
 startGame();
-
 createMonsters();
 

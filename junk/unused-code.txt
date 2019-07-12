@@ -52,3 +52,43 @@
 // doorA.length=0;
 // doorB.length=0;
 // console.log(doorA,'a',doorB, 'b');
+
+const pathFinder = () => {
+            // switch (this.x>=player.x){
+            //     case (this.x>=player.x):
+            //         this.direction = "right";
+            //         this.move();
+            //         // this.direction = "up";
+            //         this.move();
+            //     default: 
+            //     // this.direction = path;
+            //         this.direction = "right";
+            //         this.move();
+            //         // this.direction = "down";
+            //         this.move();
+            //     }
+        }
+        return pathFinder();
+
+         // } if (this.y = player.y && this.x>player.x){
+        //     this.direction = "left"
+        //     this.move();
+        //     this.direction = "left"
+        //     this.move();
+        // } else if (this.x = player.x && this.y<player.y){
+        //     this.direction = "up"
+        //     this.move();
+        //     this.direction = "up"
+        //     this.move();
+        // } else if (this.y = player.y && this.x<player.x){
+        //     this.direction = "right"
+        //     this.move();
+        //     this.direction = "right"
+        //     this.move();
+        // }
+        // else if (this.x = player.x && this.y>player.y){
+        //     this.direction = "down"
+        //     this.move();
+        //     this.direction = "down"
+        //     this.move();
+        // } 

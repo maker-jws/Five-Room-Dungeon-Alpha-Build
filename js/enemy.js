@@ -1,6 +1,7 @@
 const gameEnemies = [];
-
-statArray = [
+const options = ["up", "up","up","right","right", "right", "down","down","left","left", "up","right","down","left"];
+const choices = options.slice();
+const statArray = [
     {name:"goblin", 
     hp:2, 
     color:"lightgreen",
@@ -46,42 +47,54 @@ class Enemy {
     attack(){
         console.log(`${this.name}attacks!`); 
       }; 
+    randomPath(){ 
+        for (let i = choices.length - 1; i > 0; i--) {
+            let r = Math.floor(Math.random() * (i + 1));
+            let temp = choices[i];
+            choices[i] = choices[r];
+            choices[r] = temp;
+        }
+            const path = choices[choices.length-2]; //path random but if it read through options in order and returned path      
+            this.direction = path;
+            this.move()
+            this.render();
+    }
+
     choosePath(){ 
-        const options = ["up","down","left","right"];
-        const path = options[Math.floor(Math.random()*options.length)]; //path random but if it read through options in order and returned path      
-        this.direction = path; 
-        this.move();
-    };
+            const path = options[Math.floor(Math.random()*options.length)]; //path random but if it read through options in order and returned path      
+            this.direction = path;
+            this.move();
+            this.render();
+}
     move(){
         $(`#cell_${this.map}_${this.y}_${this.x}`).removeClass(`enemy ${this.name}`);
         $(`#cell_${this.map}_${this.y}_${this.x}`).attr('style',"");
+        
         if (this.direction === "up" && this.y>0){   
             if($(`#cell_${this.map}_${this.y-1}_${this.x}`).hasClass('wall')===true || $(`#cell_${this.map}_${this.y-1}_${this.x}`).hasClass('enemy')===true){
             } else{
                 this.y--}     
-        } else if (this.direction === "down" && this.y<12 ){
-            if( $(`#cell_${this.map}_${this.y+1}_${this.x}`).hasClass('wall')===true || $(`#cell_${this.map}_${this.y+1}_${this.x}`).hasClass('enemy')===true) {
+        } else if (this.direction === "down" && this.y<rows){
+            if( $(`#cell_${this.map}_${this.y+1}_${this.x}`).hasClass('wall')===true || $(`#cell_${this.map}_${this.y+1}_${this.x}`).hasClass('enemy')===true) { 
             } else{
                 this.y++}       
         }else if (this.direction === "left" && this.x>0){
-            if($(`#cell_${this.map}_${this.y}_${this.x-1}`).hasClass('wall')===true || $(`#cell_${this.map}_${this.y}_${this.x-1}`).hasClass('enemy')===true) {
+            if($(`#cell_${this.map}_${this.y}_${this.x-1}`).hasClass('wall')===true || $(`#cell_${this.map}_${this.y}_${this.x-1}`).hasClass('enemy')===true) { 
             } else{
                 this.x--}          
-        }else if (this.direction === "right" && this.x<12){
+        }else if (this.direction === "right" && this.x<columns){
             if($(`#cell_${this.map}_${this.y}_${this.x+1}`).hasClass('wall')===true || $(`#cell_${this.map}_${this.y}_${this.x+1}`).hasClass('enemy')===true){
             } else{
                 this.x++}
         }
         
-        this.render();
-        this.position = [this.map, this.y,this.x]
+        this.position = [this.map,this.y,this.x]
         return this.position;   
     };
     render(){
         $(`#cell_${this.map}_${this.y}_${this.x}`).addClass(`enemy ${this.name}`);
         $(`#cell_${this.map}_${this.y}_${this.x}`).css("background-color",` ${this.color}`);
-    };
-         
+    };        
 };
 
 // $player.attr('draggable','true'); https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/ondragstart
