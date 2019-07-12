@@ -1,6 +1,5 @@
-let doorA;
-let doorB;
-const doorLocations ={};
+const doorLocations =[];
+const matchingDoors = [];
 const tunnelLocations ={};
 const liveMap = [1,1,1];
 let currentMap; 
@@ -23,7 +22,7 @@ function parseMap(){
                     cell.addClass('floor');
                 } else if (mapPack[m][r][c]>=10){ //door
                     n++
-                    doorLocations[n]=["door:",D,r,c,m]
+                    doorLocations.push(["door:",D,r,c,m])
                     cell.addClass('door');
                 }else if (mapPack[m][r][c]===3){ //tunnel
                     cell.addClass('tunnel');
@@ -39,53 +38,64 @@ function parseMap(){
     }
 }
 }
+
  // this loop will only run if doorMatch is set to true - when the player enters a door 
 function findMatch(){
-    const name = 1;
-    const y = 2;
-    const x = 3;
-    const map = 4;
-    checkDoor();
-    console.log(doorA, 'door a before check of map change');
-    for (let m=1;m<Object.keys(doorLocations).length;m++){
-         doorB = doorLocations[m].slice();
-        if(player.direction === "up" && doorB[name] === doorA[name] && doorB[y] && doorA[map] !== doorB[map]){
-
-            player.populate(player.name,doorB[map],doorB[y],doorB[x])
-           
-         } else if(player.direction === "down" && doorB[name] === doorA[name] && doorA[map] !== doorB[map]){
-            player.populate(player.name,doorB[map],doorB[y],doorB[x])
-           
-         } else if(player.direction === "left" && doorB[name] === doorA[name] && doorA[map] !== doorB[map] ){
-            player.populate(player.name,doorB[map],doorB[y],doorB[x])
-           
-         } if(player.direction === "right" && doorB[name] === doorA[name] && doorA[map] !== doorB[map]){
-            //if player direction is right AND  door b name is the same as door a name  AND doorB map is not the same as doorA map. 
-            player.populate(player.name,doorB[map],doorB[y],doorB[x])
-            
-            
-         }
-    }  
-    console.log(doorA,'a',doorB, 'b');
-    doorA.length=0;
-    doorB.length=0;
-    console.log(doorA,'a',doorB, 'b');
-} 
-
-function checkDoor(){
-    const name = 1;
-    const y = 2;
-    const x = 3;
-    const map = 4;
-    for (let i=1;i<Object.keys(doorLocations).length+1;i++){ //search all doors in object
-        //supposed to store player information about door entered 'door A'
-        if(doorLocations[i][y]===player.y && doorLocations[i][x]===player.x && doorLocations[i][map]===player.map){ 
-            // if a door matches player y,x then change doorMatch to true;
-            doorA = doorLocations[i].slice();
-            console.log(doorA, 'door a after entering door.');
-            console.log(`You entered door ${doorLocations[i][name]}`);
-             //store the door "number" the player is in as 
 }
-}   
 
-}
+
+
+
+// console.log(doorLocations);
+//     for(let m=1;m<=Object.keys(doorLocations).length;m++){
+//        let mostCommon = doorLocations[0];
+//        if (doorLocations[m][name]===mostCommon[name]){
+//            const newMatch=doorLocation.slice(doorLocations[m])
+//             mostCommon = doorLocations[m]
+//     }
+// } 
+// function checkDoor(){
+//     const name = 1;
+//     const y = 2;
+//     const x = 3;
+//     const map = 4;
+//     const doorA = doorLocations.slice();
+    
+//              //store the door "number" the player is in as 
+// }
+// }   
+// return doorA;
+// }
+
+// for (let i=1;i<Object.keys(doorLocations).length+1;i++){ //search all doors in object
+//     //supposed to store player information about door entered 'door A'
+//     if(doorA[i][y]===player.y && doorA[i][x]===player.x && doorA[i][map]===player.map){ 
+//         // if a door matches player y,x then change doorMatch to true;
+        
+//         console.log(doorA, 'door a after entering door.');
+//         console.log(`You entered door ${doorLocations[i][name]}`);
+
+// for (let m=1;m<Object.keys(doorLocations).length;m++){
+//     const doorB = doorLocations[m].slice();
+//      console.log(doorB, 'door b before check of map change');
+//     if(player.direction === "up" && doorB[name] === doorA[name] && doorB[y] && doorA[map] !== doorB[map]){
+
+//         player.populate(player.name,doorB[map],doorB[y],doorB[x])
+       
+//      } else if(player.direction === "down" && doorB[name] === doorA[name] && doorA[map] !== doorB[map]){
+//         player.populate(player.name,doorB[map],doorB[y],doorB[x])
+       
+//      } else if(player.direction === "left" && doorB[name] === doorA[name] && doorA[map] !== doorB[map] ){
+//         player.populate(player.name,doorB[map],doorB[y],doorB[x])
+       
+//      } if(player.direction === "right" && doorB[name] === doorA[name] && doorA[map] !== doorB[map]){
+//         //if player direction is right AND  door b name is the same as door a name  AND doorB map is not the same as doorA map. 
+//         player.populate(player.name,doorB[map],doorB[y],doorB[x])
+        
+        
+//      }
+// }   
+// console.log(doorA,'a',doorB, 'b');
+// doorA.length=0;
+// doorB.length=0;
+// console.log(doorA,'a',doorB, 'b');

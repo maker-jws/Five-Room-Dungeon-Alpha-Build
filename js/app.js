@@ -29,8 +29,6 @@ function startGame(){
     $(`#grid-holder2`).append($startClock);
     $('#start').click( function () {
         parseMap();
-        console.log(mapPack);
-        console.log(doorLocations);
         player.populate("buddy",0,6,1);  
         $startClock.remove();
         $(`#timerDisplay`).append($timerDisplay)
