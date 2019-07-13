@@ -1,38 +1,26 @@
 let timer;
-let timelimit=3;
-let counter=1;
+let timelimit;
+let counter=10;
 let timeOut = false;
 $(`#wrapper`).attr('visibility','hidden');
 $(`#wrapper`).hide();
-startGame(1);
+startGame(5);
 
 
 function setup(){
-    const $startClock = $("<button class=clock id=start>Start Game</button>");
+    const $startClockButton = $("<button class=clock id=start>Start Game</button>");
     const $timerDisplay = $("<div class=clock id=display> Time Remaining:  <span class=clock id=minute></span> || <span class=clock id=second></span> || <span class=clock id=ms></span></div>");
     
-    $(`#startButton`).append($startClock);
+    $(`#startButton`).append($startClockButton);                        
     $(`#wrapper`).show();
     $('#start').click( function () {
-        $startClock.remove();
-        parseMap();
+        $startClockButton.remove();
+        parseMap();                                                 
         player.populate("buddy",0,23,1);
-        updateGameInfo()
+        updateGameInfo() 
         $(`#playerCol`).show();
-        $(`#timerDisplay`).append($timerDisplay); 
-            
-        const timer = setInterval(function(){
-            gameClock.changeClock(10);
-            counter++;
-            if (counter%66===0){
-                for(let i=0;i<gameEnemies.length;i++){
-                    setTimeout(function(){ 
-                        // gameEnemies[i].choosePath();
-                        },250);  
-                    }
-            }
-            },12);}    
-    );    
+        $(`#timerDisplay`).append($timerDisplay);    
+    });
 }
 
 function startGame(timed){
@@ -40,6 +28,12 @@ function startGame(timed){
     $(`#playerCol`).hide();
     setup();
     createMonsters();
+    const timer = setInterval(function(){
+        gameClock.changeClock(10);
+        counter++;
+        enemyBehavior();
+        return timer;    
+        },12); 
 }
 
 const gameClock =  {
@@ -86,5 +80,13 @@ function endGame(){
         
 };
 
-
-
+function enemyBehavior(){
+    if (counter%66===0){                                 //this could be moved to enemy Behavior
+        for(let i=0;i<gameEnemies.length;i++){
+            setTimeout(function(){ 
+                // gameEnemies[i].choosePath();
+                },250);  
+            }
+    }
+}
+function battle(){}

@@ -1,9 +1,11 @@
+const freeSpace = !$("div").hasClass('wall'); 
+
 const player = {
     name: "",
     torch: 3,
     heart: 4,
     armor: 2,
-    speed: 60,
+    speed: 100,
     inventory: ["crumbs", "dog teeth",  "chewing gum(chewed)"],
     x: 0, 
     y: 0,
@@ -23,9 +25,9 @@ const player = {
         console.log(`${this.name} joined the game`);
         console.log(this);
     },
-    attack(){
+    attack(){ //renders an attack in the players current direction(on a delay related tied to player speed )
         var character = this;
-        if (player.direction==="up"){
+        if (this.attackdir==="up"){ //modify player.direction to attackDir created by attackListener 
             setTimeout(
             function() { 
                 $(`#cell_${character.map}_${character.y-1}_${character.x}`).addClass('playerAttacked')
@@ -37,7 +39,7 @@ const player = {
         
             this.render()   
             
-        } else if (player.direction==="down"){
+        } else if (this.attackdir==="down"){
             setTimeout(
                 function() { 
                     console.log(`${character.name} attacks at his front`);
@@ -48,7 +50,7 @@ const player = {
                 $( "div" ).removeClass( "playerAttacked" );
                 }, this.speed*3);
             this.render()   
-        } else if (player.direction==="left"){
+        } else if (this.attackdir==="left"){
             setTimeout(
             function() { 
                 console.log(`${character.name} attacks at his front`);
@@ -58,8 +60,9 @@ const player = {
             setTimeout(function() { console.log(`${character.name} finishes his attack`)
             $( "div" ).removeClass( "playerAttacked" );
             }, this.speed*3);
-            this.render()   
-        } else if (player.direction==="right"){
+            this.render()  
+
+        } else if (this.attackdir==="right"){
             setTimeout(
                 function() { 
                     console.log(`${character.name} attacks at his front`);
@@ -74,13 +77,12 @@ const player = {
     },
     render(){
         let character=this
-        setTimeout(function(){
+        setTimeout(function(){ // controls player speed by determining its update 
             $( "div" ).removeClass( "player" );
-            if(!$(`#cell_${character.map}_${character.y}_${character.x}`).hasClass('wall')){
+            if(!$(`#cell_${character.map}_${character.y}_${character.x}`).hasClass('wall')){ //prevents the player 
                 $(`#cell_${character.map}_${character.y}_${character.x}`).addClass('player');
             } else {
-                $(`#cell_${character.map}_${character.y+1}_${character.x+1}`).addClass('player')
-            } 
+                $(`#cell_${character.map}_${character.y+1}_${character.x+1}`).addClass('player')} 
         }, this.speed);
          
     },
@@ -95,12 +97,17 @@ const player = {
         }
     },
     interact(){
-
+            //checktile for treasure 
+            //checktile for monster >> this.attack()
+            //checktile for lock
     },
-    move: function(){
+    checkEnemy(){}, //if attackdirection has class Enemy // game.battle.
+    checkLock(){}, //if return false (do nothing ie continue movement if true initiate picklock)
+    checkWall(){}, //if return false (do nothing ie continue movement if true initiate picklock)
+    move: function(){ //adjusts 
         if (this.direction === "up" && this.y>0 ){   
             if($(`#cell_${this.map}_${this.y-1}_${this.x}`).hasClass('wall')===true) {
-                console.log('you inspect the wall');
+                console.log('you inspect the wall'); //checkWall()
             } else if($(`#cell_${this.map}_${this.y-1}_${this.x}`).hasClass('door')===true){
                 this.y--
                 //check if locked
@@ -120,15 +127,16 @@ const player = {
             if($(`#cell_${this.map}_${this.y}_${this.x-1}`).hasClass('wall')===true) {
                 console.log('you inspect the wall');
             } else if($(`#cell_${this.map}_${this.y}_${this.x-1}`).hasClass('door')===true){
+                //check if locked  // 
                 this.x--
-                //check if locked
+                
             }
             else{
                 this.x--    
             }          
         }else if (this.direction === "right" && this.x<columns){
             if($(`#cell_${this.map}_${this.y}_${this.x+1}`).hasClass('wall')===true) {
-                console.log('you inspect the wall');
+                console.log('you inspect the wall'); //check
             }else if($(`#cell_${this.map}_${this.y}_${this.x+1}`).hasClass('door')===true){
                 this.x++ 
                 //check if locked
@@ -137,15 +145,15 @@ const player = {
                 
             }    
         }
-        console.log(player.map,player.y,player.x);
+        // console.log(player.map,player.y,player.x);
         this.render();
     }   
 }
 
 //listener for player
-$('body').keypress(function(e){
+$('body').keypress(function(e){      //controls player movement & listens for interact keys: [f q]
     const keyed = event.which;
-    console.log(event.which)
+    // console.log(event.which)
     if (keyed === 119){
        player.direction="up";
        player.move(); 
@@ -158,8 +166,27 @@ $('body').keypress(function(e){
     } else if (keyed === 100) {
         player.direction="right";
         player.move();
-    } else if (keyed === 102 ||  keyed === 113 ) {
-        player.attack();
+    } else if (keyed === 102 ||  keyed === 113 ) { //triggers attack in attack direction
+        player.interact();
+        console.log(keyed)
+        return keyed;
     } else {}
     
+});
+$('body').keydown(function(e){  //controls player attack
+    const keyed = event.which;
+    // console.log(event.which)
+    if (keyed === 38){
+       player.attackdir="up";
+       player.attack(); 
+    } else if (keyed === 40) {
+        player.attackdir="down"; 
+        player.attack()
+    } else if (keyed === 37) {
+        player.attackdir="left";
+        player.attack(); 
+    } else if (keyed === 39) {
+        player.attackdir="right";
+        player.attack();
+    } else {}
 });
