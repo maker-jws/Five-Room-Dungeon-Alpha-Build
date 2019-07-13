@@ -1,9 +1,9 @@
 const player = {
     name: "",
-    torch: 10,
-    heart: 10,
-    armor: 3,
-    speed: 1,
+    torch: 3,
+    heart: 4,
+    armor: 2,
+    speed: 20,
     inventory: ["crumbs"],
     x: 0, 
     y: 0,
@@ -11,6 +11,7 @@ const player = {
     direction: "",
     attackdir: "",
     lastLocation: [undefined,undefined],
+    
     checkHealth: function (){
     },
     populate: function(alias, m, r, c){ 
@@ -27,14 +28,13 @@ const player = {
         if (player.direction==="up"){
             setTimeout(
             function() { 
-                console.log(`${character.name} attacks at his front`);
                 $(`#cell_${character.map}_${character.y-1}_${character.x}`).addClass('playerAttacked')
-
         }, 1);
             setTimeout(function() { console.log(`${character.name} finishes his attack`)
             $( "div" ).removeClass( "playerAttacked" );
             }, 100);
-        this.render()   
+        
+            this.render()   
             
         } else if (player.direction==="down"){
             setTimeout(
@@ -57,7 +57,7 @@ const player = {
             setTimeout(function() { console.log(`${character.name} finishes his attack`)
             $( "div" ).removeClass( "playerAttacked" );
             }, 100);
-        this.render()   
+            this.render()   
         } else if (player.direction==="right"){
             setTimeout(
                 function() { 
@@ -72,14 +72,18 @@ const player = {
         } else {console.log(`${this.name} attacks`);}   
     },
     render(){
-        $( "div" ).removeClass( "player" );
-        if(!$(`#cell_${this.map}_${this.y}_${this.x}`).hasClass('wall')){
-            $(`#cell_${this.map}_${this.y}_${this.x}`).addClass('player');
-        } else {
-            $(`#cell_${this.map}_${this.y+1}_${this.x+1}`).addClass('player')
-        }  
+        let character=this
+        setTimeout(function(){
+            $( "div" ).removeClass( "player" );
+            if(!$(`#cell_${character.map}_${character.y}_${character.x}`).hasClass('wall')){
+                $(`#cell_${character.map}_${character.y}_${character.x}`).addClass('player');
+            } else {
+                $(`#cell_${character.map}_${character.y+1}_${character.x+1}`).addClass('player')
+            } 
+        }, this.speed);
+         
     },
-    displayItems(){
+    addDisplayItems(){
         for (let h=1;h<=this.heart;h++){
             const heartBox = $(`<div class="cell heartBox" heartNum ="${h}"></div>`)
             $(`#playerHP`).append(heartBox); 

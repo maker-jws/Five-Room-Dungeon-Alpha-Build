@@ -6,22 +6,27 @@ rgba(30, 105, 190, 0.5) */
 body{
   background-image: url("../cloud-drawing-texture-1.png");
   /* background: linear-gradient(180deg, darkgray 0% , lightgray 18%, red  100%); */
-  height: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   overflow: inherit;
-  max-height: 70vh;
+  margin: 0 auto;
+  height: 100%;
+  font-family: fantasy;
 }
 #header{
   background-color: rgb(255, 255, 255);
-  padding: 1em;
+  padding: .1em;
+  margin: .1em;
   box-shadow: (0,0,20px,black)
 }
-
+#title{
+  font-size: 1.5 rem;
+}
 #wrapper{
   background-color: rgba(192, 192, 192, 0.7);
   padding: 1em;
+  margin:.1em;
   border-radius: 1em;
   border-top: 1.5rem solid rgba(227, 215, 255, 0.8);
   border-left: 1.5rem solid rgba(227, 215, 255, 0.8);
@@ -32,12 +37,17 @@ body{
 #game-info{ 
   border: 1px red solid;
   display: block;
+  margin 0 1em;
 }
 .game-info-item{
+  margin: .1em .3em;
+
   padding: .1em;
   border: 1px black solid;
-  overflow: contain;
-  max-width: 10vw;
+}
+#playerCol{
+  min-width: 20vw;
+  font-family: monospace
 }
 .playerInfo{
   font-size:1.2em;
@@ -47,7 +57,6 @@ body{
   background-color: white;
 }
 #header{
-  margin:0;
   font-size: inherit; 
 }
 #startButton{
@@ -59,13 +68,17 @@ body{
 .gameContent{
   background-color: rgba(255, 255, 255, 0.5);
 }
-
+#timerDisplay{
+  font-size: 1rem;
+  padding: .3rem;
+  margin: 0 1rem;
+  width: 18vw 
+}
 #grid-holder0{
-  margin: 1em;
-  margin:10px;
   border: 1px solid black;
   box-sizing: border-box;
-  
+  background-color: lightblue;
+  min-width: auto;
   
 }
 #game-space{
@@ -78,8 +91,8 @@ body{
   
 }
 .cell{
-  width: 24px; 
-  height: 24px;
+  width: 1rem; 
+  height: 1rem;
   border: 1px solid rgba(0,0,0,.1);
 }
 .door{
@@ -127,7 +140,6 @@ body{
   /* background: url('../single_border.png'); */
   background-size: contain;
   background-position: center;
-  width: 15vw;
   height: 2em;
   padding-bottom: 5px;
 }

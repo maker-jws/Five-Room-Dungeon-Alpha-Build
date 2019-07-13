@@ -47,19 +47,6 @@ class Enemy {
     attack(){
         console.log(`${this.name}attacks!`); 
       }; 
-    randomPath(){ 
-        for (let i = choices.length - 1; i > 0; i--) {
-            let r = Math.floor(Math.random() * (i + 1));
-            let temp = choices[i];
-            choices[i] = choices[r];
-            choices[r] = temp;
-        }
-            const path = choices[choices.length-2]; //path random but if it read through options in order and returned path      
-            this.direction = path;
-            this.move()
-            this.render();
-    }
-
     choosePath(){ 
             const path = options[Math.floor(Math.random()*options.length)]; //path random but if it read through options in order and returned path      
             this.direction = path;
