@@ -2,6 +2,8 @@ let timer;
 let timelimit=3;
 let counter=1;
 let timeOut = false;
+$(`#wrapper`).attr('visibility','hidden');
+$(`#wrapper`).hide();
 startGame(1);
 
 
@@ -36,7 +38,6 @@ function setup(){
 function startGame(timed){
     timelimit = timed;
     $(`#playerCol`).hide();
-    $(`#wrapper`).hide();
     setup();
     createMonsters();
 }
@@ -50,10 +51,10 @@ const gameClock =  {
        $(`#ms`).text(`${gameClock.ms} `)
        $(`#second`).text(`   ${gameClock.second} `);
        $(`#minute`).text(`   ${gameClock.minute}`); 
-       if (this.ms <=0){
+       if (this.ms <0){
        this.ms=100;
        this.second--;
-      } else if (this.second<0){
+      } else if (this.second<=0){
         this.second = 59;
         this.minute--;
       } else if (this.minute<0){

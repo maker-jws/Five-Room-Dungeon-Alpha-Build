@@ -27,33 +27,38 @@ body{
   background-color: rgba(192, 192, 192, 0.7);
   border-radius: 1em;
   margin: .3rem;
-
+/* 
   border-top: 1.5rem solid rgba(227, 215, 255, 0.8);
   border-left: 1.5rem solid rgba(227, 215, 255, 0.8);
   border-bottom: 1.5rem solid rgba(192, 192, 192, 0.8);
-  border-right: 1.5rem solid rgba(192, 192, 192, 0.8);
+  border-right: 1.5rem solid rgba(192, 192, 192, 0.8); */
 } 
 
 #game-info{ 
-  border: 1px red solid;
   display: block;
-  margin 0 1em;
+  margin: 1rem;
 }
 .game-info-item{
   margin: .1em .3em;
   padding: .1em;
-  border: 1px black solid;
+
 }
 #playerCol{
   min-width: auto;
-  margin: 10px;
-  font-family: monospace
+  font-family: monospace;
+  width: 25vw;
+  margin: 0 auto;
 }
 .playerInfo{
   font-size:1.2em;
   font-style: bolder;
-  border: 1 solid black;
+  text-align: left;
+  margin: .3rem 1rem;
+  padding: .3rem -1rem;
   background-color: white;
+}
+#playerInventory{
+  display: block;
 }
 #header{
   font-size: inherit; 
@@ -64,20 +69,19 @@ body{
 #display{
   font-size: 1em;
 }
-.gameContent{
+/* .gameContent{
   background-color: rgba(255, 255, 255, 0.5);
-}
+} */
 #timerDisplay{
   margin:0;
   padding:0;
   font-size: .8rem;
-  margin: 4rem 2rem;
+  margin: 1rem;
   text-align: center;
   width: 20vw;
   background-color: white;
 }
 #grid-holder0{
-  border: 1px solid black;
   box-sizing: border-box;
   background-color: lightblue;
   min-width: 525px;
@@ -135,10 +139,6 @@ body{
   border: .5px solid magenta;
 }
 
-.playerInfo{
-  text-align: center;
-  border: 1px solid black;
-}
 #divider{
   background: url('../single_border.png'); */
   background-size: contain;

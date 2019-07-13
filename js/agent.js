@@ -4,7 +4,7 @@ const player = {
     heart: 4,
     armor: 2,
     speed: 60,
-    inventory: ["crumbs"],
+    inventory: ["crumbs", "dog teeth",  "chewing gum(chewed)"],
     x: 0, 
     y: 0,
     map: 0,
