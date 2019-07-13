@@ -1,7 +1,8 @@
 let timer;
+let timelimit=3;
 let counter=1;
 let timeOut = false;
-startGame();
+startGame(1);
 
 
 function setup(){
@@ -25,14 +26,15 @@ function setup(){
                 for(let i=0;i<gameEnemies.length;i++){
                     setTimeout(function(){ 
                         // gameEnemies[i].choosePath();
-                        },30);  
+                        },250);  
                     }
             }
-            },1);}    
+            },12);}    
     );    
 }
 
-function startGame(){
+function startGame(timed){
+    timelimit = timed;
     $(`#playerCol`).hide();
     $(`#wrapper`).hide();
     setup();
@@ -40,7 +42,7 @@ function startGame(){
 }
 
 const gameClock =  {
-    minute: 10,
+    minute: timelimit,
     second: 00,
     ms: 100,
     changeClock: function(){
@@ -51,8 +53,8 @@ const gameClock =  {
        if (this.ms <=0){
        this.ms=100;
        this.second--;
-      } else if (this.second<=0){
-        this.second = 60;
+      } else if (this.second<0){
+        this.second = 59;
         this.minute--;
       } else if (this.minute<0){
         timeOut = true;

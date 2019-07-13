@@ -25,9 +25,9 @@ body{
 }
 #wrapper{
   background-color: rgba(192, 192, 192, 0.7);
-  padding: 1em;
-  margin:.1em;
   border-radius: 1em;
+  margin: .3rem;
+
   border-top: 1.5rem solid rgba(227, 215, 255, 0.8);
   border-left: 1.5rem solid rgba(227, 215, 255, 0.8);
   border-bottom: 1.5rem solid rgba(192, 192, 192, 0.8);
@@ -41,19 +41,18 @@ body{
 }
 .game-info-item{
   margin: .1em .3em;
-
   padding: .1em;
   border: 1px black solid;
 }
 #playerCol{
-  min-width: 20vw;
+  min-width: auto;
+  margin: 10px;
   font-family: monospace
 }
 .playerInfo{
   font-size:1.2em;
   font-style: bolder;
   border: 1 solid black;
-  margin: .1em;
   background-color: white;
 }
 #header{
@@ -69,16 +68,20 @@ body{
   background-color: rgba(255, 255, 255, 0.5);
 }
 #timerDisplay{
-  font-size: 1rem;
-  padding: .3rem;
-  margin: 0 1rem;
-  width: 18vw 
+  margin:0;
+  padding:0;
+  font-size: .8rem;
+  margin: 4rem 2rem;
+  text-align: center;
+  width: 20vw;
+  background-color: white;
 }
 #grid-holder0{
   border: 1px solid black;
   box-sizing: border-box;
   background-color: lightblue;
-  min-width: auto;
+  min-width: 525px;
+  text-align: center;
   
 }
 #game-space{
@@ -86,13 +89,13 @@ body{
   background-repeat: no-repeat;
   overflow: initial;
   background-size: cover;
-  margin: 1em;
+  margin: 1rem;
   margin-top: .2em;  
   
 }
 .cell{
-  width: 1rem; 
-  height: 1rem;
+  width: 1.3rem; 
+  height: 1.3rem;
   border: 1px solid rgba(0,0,0,.1);
 }
 .door{
@@ -137,7 +140,7 @@ body{
   border: 1px solid black;
 }
 #divider{
-  /* background: url('../single_border.png'); */
+  background: url('../single_border.png'); */
   background-size: contain;
   background-position: center;
   height: 2em;

@@ -3,7 +3,7 @@ const player = {
     torch: 3,
     heart: 4,
     armor: 2,
-    speed: 20,
+    speed: 60,
     inventory: ["crumbs"],
     x: 0, 
     y: 0,
@@ -30,9 +30,10 @@ const player = {
             function() { 
                 $(`#cell_${character.map}_${character.y-1}_${character.x}`).addClass('playerAttacked')
         }, 1);
+            
             setTimeout(function() { console.log(`${character.name} finishes his attack`)
             $( "div" ).removeClass( "playerAttacked" );
-            }, 100);
+            }, this.speed*3);
         
             this.render()   
             
@@ -45,7 +46,7 @@ const player = {
             }, 1);
                 setTimeout(function() { console.log(`${character.name} finishes his attack`)
                 $( "div" ).removeClass( "playerAttacked" );
-                }, 100);
+                }, this.speed*3);
             this.render()   
         } else if (player.direction==="left"){
             setTimeout(
@@ -56,7 +57,7 @@ const player = {
         }, 1);
             setTimeout(function() { console.log(`${character.name} finishes his attack`)
             $( "div" ).removeClass( "playerAttacked" );
-            }, 100);
+            }, this.speed*3);
             this.render()   
         } else if (player.direction==="right"){
             setTimeout(
@@ -67,7 +68,7 @@ const player = {
             }, 1);
                 setTimeout(function() { console.log(`${character.name} finishes his attack`)
                 $( "div" ).removeClass( "playerAttacked" );
-                }, 100);
+                }, this.speed*3);
             this.render()   
         } else {console.log(`${this.name} attacks`);}   
     },
