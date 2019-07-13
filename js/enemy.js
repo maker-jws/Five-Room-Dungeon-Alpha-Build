@@ -52,25 +52,26 @@ class Enemy {
             this.direction = path;
             this.move();
             this.render();
-}
+    }
     move(){
         $(`#cell_${this.map}_${this.y}_${this.x}`).removeClass(`enemy ${this.name}`);
         $(`#cell_${this.map}_${this.y}_${this.x}`).attr('style',"");
         
         if (this.direction === "up" && this.y>0){   
-            if($(`#cell_${this.map}_${this.y-1}_${this.x}`).hasClass('wall')===true || $(`#cell_${this.map}_${this.y-1}_${this.x}`).hasClass('enemy')===true){
+            if($(`#cell_${this.map}_${this.y-1}_${this.x}`).hasClass('wall') || $(`#cell_${this.map}_${this.y-1}_${this.x}`).hasClass('enemy')  || $(`#cell_${this.map}_${this.y-1}_${this.x}`).hasClass('player')){
             } else{
                 this.y--}     
         } else if (this.direction === "down" && this.y<rows){
-            if( $(`#cell_${this.map}_${this.y+1}_${this.x}`).hasClass('wall')===true || $(`#cell_${this.map}_${this.y+1}_${this.x}`).hasClass('enemy')===true) { 
+            if( $(`#cell_${this.map}_${this.y+1}_${this.x}`).hasClass('wall') || $(`#cell_${this.map}_${this.y+1}_${this.x}`).hasClass('enemy') || $(`#cell_${this.map}_${this.y-1}_${this.x}`).hasClass('player')) { 
             } else{
                 this.y++}       
         }else if (this.direction === "left" && this.x>0){
-            if($(`#cell_${this.map}_${this.y}_${this.x-1}`).hasClass('wall')===true || $(`#cell_${this.map}_${this.y}_${this.x-1}`).hasClass('enemy')===true) { 
+            if($(`#cell_${this.map}_${this.y}_${this.x-1}`).hasClass('wall') || $(`#cell_${this.map}_${this.y}_${this.x-1}`).hasClass('enemy') || $(`#cell_${this.map}_${this.y-1}_${this.x}`).hasClass('player')) { 
             } else{
                 this.x--}          
         }else if (this.direction === "right" && this.x<columns){
-            if($(`#cell_${this.map}_${this.y}_${this.x+1}`).hasClass('wall')===true || $(`#cell_${this.map}_${this.y}_${this.x+1}`).hasClass('enemy')===true){
+            if($(`#cell_${this.map}_${this.y}_${this.x+1}`).hasClass('wall') || $(`#cell_${this.map}_${this.y}_${this.x+1}`).hasClass('enemy') || $(`#cell_${this.map}_${this.y-1}_${this.x}`).hasClass('player')) {
+            console.log()
             } else{
                 this.x++}
         }
@@ -83,10 +84,8 @@ class Enemy {
         $(`#cell_${this.map}_${this.y}_${this.x}`).css("background-color",` ${this.color}`);
     };        
 };
-
 // $player.attr('draggable','true'); https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/ondragstart
-
-function createMonsters(){
+function createMonsters(num){
     for (let i=0; i<statArray.length; i++){
         const monster = new Enemy(statArray[i]);
         gameEnemies.push(monster);
@@ -94,3 +93,18 @@ function createMonsters(){
     }
 }
 
+const targetSquare = {
+    target: $('.player'),
+    num: 0
+    
+//     getSquare(){
+//         const selected = $(this.target)[this.num] 
+//         console.log(selected);   
+//         // const selectedID = $(selected).attr('id');
+//         // const selectedClass = $(selected).attr('class'); //stores class information  
+        
+// }
+}
+
+// $('body').keypress(targetSquare.getSquare);
+        

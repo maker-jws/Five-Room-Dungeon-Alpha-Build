@@ -6,10 +6,9 @@ $(`#wrapper`).attr('visibility','hidden');
 $(`#wrapper`).hide();
 startGame(5);
 
-
 function setup(){
     const $startClockButton = $("<button class=clock id=start>Start Game</button>");
-    const $timerDisplay = $("<div class=clock id=display> Time Remaining:  <span class=clock id=minute></span> || <span class=clock id=second></span> || <span class=clock id=ms></span></div>");
+    const $timerDisplay = $("<div class=clock id=display> Time Remaining:  <span class=clock id=minute></span> || <span class=clock id=second></span></div>"); //|| <span class=clock id=ms></span>
     
     $(`#startButton`).append($startClockButton);                        
     $(`#wrapper`).show();
@@ -42,7 +41,7 @@ const gameClock =  {
     ms: 100,
     changeClock: function(){
        this.ms--
-       $(`#ms`).text(`${gameClock.ms} `)
+    //    $(`#ms`).text(`${gameClock.ms} `)
        $(`#second`).text(`   ${gameClock.second} `);
        $(`#minute`).text(`   ${gameClock.minute}`); 
        if (this.ms <0){
@@ -84,9 +83,10 @@ function enemyBehavior(){
     if (counter%66===0){                                 //this could be moved to enemy Behavior
         for(let i=0;i<gameEnemies.length;i++){
             setTimeout(function(){ 
-                // gameEnemies[i].choosePath();
+                gameEnemies[i].choosePath();
                 },250);  
             }
     }
 }
+
 function battle(){}

@@ -105,3 +105,20 @@ const pathFinder = () => {
             this.move()
             this.render();
     }
+
+          
+        // const screenX = container.getBoundingClientRect(Math.round(selected.top));
+        // const selected = $(target)[num] 
+        // const selectedID = $(selected).attr('id');
+        // const selectedClass = $(selected).attr('class'); //stores class information  
+        // console.log(selected, selectedClass, selectedID);
+        // console.log(screenX,screenY);
+        // const rect = selected.getBoundingClientRect(); //substitute selected for $(cell...m...y...x)
+        //const selectedLocation = [Math.round(selected.top), Math.round(selected.left), Math.round(selected.bottom),Math.round(selected.right)];
+        // const screenY = event.clientY; if used on click, will tell you where the mouse was clicked
+        
+
+        // if(selected.hasClass('wall')){
+        //     return console.log('this is a wall')
+        // } else (console.log('this is not a wall'));
+    

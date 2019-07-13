@@ -76,7 +76,7 @@ const player = {
         } else {console.log(`${this.name} attacks`);}   
     },
     render(){
-        let character=this
+        let character=this;
         setTimeout(function(){ // controls player speed by determining its update 
             $( "div" ).removeClass( "player" );
             if(!$(`#cell_${character.map}_${character.y}_${character.x}`).hasClass('wall')){ //prevents the player 
@@ -97,6 +97,7 @@ const player = {
         }
     },
     interact(){
+           console.log('you are interacting');
             //checktile for treasure 
             //checktile for monster >> this.attack()
             //checktile for lock
