@@ -179,7 +179,7 @@ $('body').keypress(function(e){      //controls player movement & listens for in
         return keyed;
     } else {}
     
-    
+    player.render('player')
 });
 $('body').keydown(function(e){  //controls player attack
     const keyed = event.which;
@@ -197,4 +197,5 @@ $('body').keydown(function(e){  //controls player attack
         player.attackdir="right";
         player.attack();
     } else {}
+    player.render('player');
 });

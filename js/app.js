@@ -2,6 +2,7 @@ let timer;
 let timelimit;
 let counter=10;
 let timeOut = false;
+let monsterInterval =300;
 $(`#wrapper`).attr('visibility','hidden');
 $(`#wrapper`).hide();
 startGame(25);
@@ -13,9 +14,9 @@ function setup(){
     $(`#startButton`).append($startClockButton);                        
     $(`#wrapper`).show();
     $('#start').click( function () {
-        $startClockButton.remove();
-        parseMap();                                                 
+        $startClockButton.remove();                                                
         player.populate("buddy",0,23,1);
+        parseMap();
         updateGameInfo() 
         $(`#playerCol`).show();
         $(`#timerDisplay`).append($timerDisplay);    
@@ -30,8 +31,7 @@ function startGame(timed){
     const timer = setInterval(function(){
         gameClock.changeClock(10);
         counter++;
-        enemyBehavior(); 
-        return timer;    
+        enemyBehavior();     
         },12); 
 }
 
@@ -44,10 +44,15 @@ const gameClock =  {
     //    $(`#ms`).text(`${gameClock.ms} `)
        $(`#second`).text(`   ${gameClock.second} `);
        $(`#minute`).text(`   ${gameClock.minute}`); 
+       
+       
        if (this.ms <0){
        this.ms=100;
-       setTimeout(player.interact,1);
        this.second--;
+
+       setTimeout(player.interact,1); //updates interaction 1/sec
+       setTimeout(checkEnemyDistance,1) // checks distance 1/second
+       
       } else if (this.second<=0){
         this.second = 59;
         this.minute--;
@@ -57,14 +62,12 @@ const gameClock =  {
       } else {}
 }
 }
-
 function updateGameInfo(){
+    
     $(`#playerName`).text(`${player.name}'s Stats`);
     player.addDisplayItems();
     $(`#playerInventory`).text(`${player.inventory} in your bag`);   
 }
-
-
 function endGame(){
     console.log('game over');
     
@@ -79,15 +82,27 @@ function endGame(){
         } 
         
 };
-
 function enemyBehavior(){
-    if (counter%66===0){                                 //this could be moved to enemy Behavior
+    if (counter%monsterInterval===0){                                 //this could be moved to enemy Behavior
         for(let i=0;i<gameEnemies.length;i++){
             setTimeout(function(){ 
                 gameEnemies[i].choosePath();
-                },250);  
+                },10);  
             }
     }
 }
+function checkEnemyDistance(){
+    for(let i=0;i<gameEnemies.length;i++){
+        
+        const distanceX = gameEnemies[i]['x']-player.x;
+        const distanceY = gameEnemies[i]['y']-player.y;
+        const vector = [distanceY, distanceX]
+        console.log(vector, `<<monster${i}`);
+        if(gameEnemies[i]['x']===player.x){     
+        } else if(gameEnemies[i]['y']===player.y){
+        }
+        }        
+}        
+
 
 function battle(){}
