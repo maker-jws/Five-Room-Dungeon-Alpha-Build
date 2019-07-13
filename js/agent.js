@@ -30,15 +30,11 @@ const player = {
         if (this.attackdir==="up"){ //modify player.direction to attackDir created by attackListener 
             setTimeout(
             function() { 
-                $(`#cell_${character.map}_${character.y-1}_${character.x}`).addClass('playerAttacked')
-        }, 1);
-            
+                $(`#cell_${character.map}_${character.y-1}_${character.x}`).addClass('playerAttacked') // can this be replaced with 
+        }, 1);        
             setTimeout(function() { console.log(`${character.name} finishes his attack`)
             $( "div" ).removeClass( "playerAttacked" );
-            }, this.speed*3);
-        
-            this.render()   
-            
+            }, this.speed*3);    
         } else if (this.attackdir==="down"){
             setTimeout(
                 function() { 
@@ -48,8 +44,7 @@ const player = {
             }, 1);
                 setTimeout(function() { console.log(`${character.name} finishes his attack`)
                 $( "div" ).removeClass( "playerAttacked" );
-                }, this.speed*3);
-            this.render()   
+                }, this.speed*3);  
         } else if (this.attackdir==="left"){
             setTimeout(
             function() { 
@@ -60,7 +55,6 @@ const player = {
             setTimeout(function() { console.log(`${character.name} finishes his attack`)
             $( "div" ).removeClass( "playerAttacked" );
             }, this.speed*3);
-            this.render()  
 
         } else if (this.attackdir==="right"){
             setTimeout(
@@ -72,17 +66,18 @@ const player = {
                 setTimeout(function() { console.log(`${character.name} finishes his attack`)
                 $( "div" ).removeClass( "playerAttacked" );
                 }, this.speed*3);
-            this.render()   
-        } else {console.log(`${this.name} attacks`);}   
+        } 
     },
-    render(){
+    render(newClass){
         let character=this;
         setTimeout(function(){ // controls player speed by determining its update 
-            $( "div" ).removeClass( "player" );
+            $( "div" ).removeClass( newClass );
             if(!$(`#cell_${character.map}_${character.y}_${character.x}`).hasClass('wall')){ //prevents the player 
-                $(`#cell_${character.map}_${character.y}_${character.x}`).addClass('player');
+                //put in for loop based on range if 2 add class to div with x === character.x-2
+                $(`#cell_${character.map}_${character.y}_${character.x}`).addClass(newClass);
+
             } else {
-                $(`#cell_${character.map}_${character.y+1}_${character.x+1}`).addClass('player')} 
+                $(`#cell_${character.map}_${character.y+1}_${character.x+1}`).addClass(newClass)} 
         }, this.speed);
          
     },
@@ -97,15 +92,24 @@ const player = {
         }
     },
     interact(){
-           console.log('you are interacting');
-            //checktile for treasure 
+            if($('.player').hasClass('treasure')){
+                console.log('you found treasure');
+    
+            } else if ($('.player').hasClass('enemy')){
+                console.log('you grapple with the enemy');
+            } else{};
             //checktile for monster >> this.attack()
             //checktile for lock
     },
-    checkEnemy(){}, //if attackdirection has class Enemy // game.battle.
-    checkLock(){}, //if return false (do nothing ie continue movement if true initiate picklock)
-    checkWall(){}, //if return false (do nothing ie continue movement if true initiate picklock)
+    search(){
+        console.log('you are searching your surroundings')
+        this.render('playerAttacked');
+    },
+    // checkEnemy(){}, //if attackdirection has class Enemy // game.battle.
+    // checkLock(){}, //if return false (do nothing ie continue movement if true initiate picklock)
+    // checkWall(){}, //if return false (do nothing ie continue movement if true initiate picklock)
     move: function(){ //adjusts 
+        
         if (this.direction === "up" && this.y>0 ){   
             if($(`#cell_${this.map}_${this.y-1}_${this.x}`).hasClass('wall')===true) {
                 console.log('you inspect the wall'); //checkWall()
@@ -113,6 +117,7 @@ const player = {
                 this.y--
                 //check if locked
             } else{
+                
                 this.y--    
             }     
         } else if (this.direction === "down" && this.y<rows){
@@ -122,7 +127,8 @@ const player = {
                 this.y++ 
                 //check if locked
             } else{
-                this.y++    
+                this.y++ 
+       
             }       
         }else if (this.direction === "left" && this.x>0){
             if($(`#cell_${this.map}_${this.y}_${this.x-1}`).hasClass('wall')===true) {
@@ -142,12 +148,13 @@ const player = {
                 this.x++ 
                 //check if locked
             } else{
-                this.x++    
+                this.x++ 
+                  
                 
             }    
         }
         // console.log(player.map,player.y,player.x);
-        this.render();
+        this.render('player');
     }   
 }
 
@@ -157,7 +164,7 @@ $('body').keypress(function(e){      //controls player movement & listens for in
     // console.log(event.which)
     if (keyed === 119){
        player.direction="up";
-       player.move(); 
+       player.move();   
     } else if (keyed === 115) {
         player.direction="down"; 
         player.move();
@@ -167,11 +174,11 @@ $('body').keypress(function(e){      //controls player movement & listens for in
     } else if (keyed === 100) {
         player.direction="right";
         player.move();
-    } else if (keyed === 102 ||  keyed === 113 ) { //triggers attack in attack direction
-        player.interact();
-        console.log(keyed)
+    } else if (keyed === 102 ||  keyed == 113 ) { //triggers attack in attack direction
+        player.search();
         return keyed;
     } else {}
+    
     
 });
 $('body').keydown(function(e){  //controls player attack

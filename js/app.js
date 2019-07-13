@@ -4,7 +4,7 @@ let counter=10;
 let timeOut = false;
 $(`#wrapper`).attr('visibility','hidden');
 $(`#wrapper`).hide();
-startGame(5);
+startGame(25);
 
 function setup(){
     const $startClockButton = $("<button class=clock id=start>Start Game</button>");
@@ -30,7 +30,7 @@ function startGame(timed){
     const timer = setInterval(function(){
         gameClock.changeClock(10);
         counter++;
-        enemyBehavior();
+        enemyBehavior(); 
         return timer;    
         },12); 
 }
@@ -46,6 +46,7 @@ const gameClock =  {
        $(`#minute`).text(`   ${gameClock.minute}`); 
        if (this.ms <0){
        this.ms=100;
+       setTimeout(player.interact,1);
        this.second--;
       } else if (this.second<=0){
         this.second = 59;

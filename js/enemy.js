@@ -93,18 +93,20 @@ function createMonsters(num){
     }
 }
 
-const targetSquare = {
-    target: $('.player'),
-    num: 0
-    
-//     getSquare(){
-//         const selected = $(this.target)[this.num] 
-//         console.log(selected);   
-//         // const selectedID = $(selected).attr('id');
-//         // const selectedClass = $(selected).attr('class'); //stores class information  
+const checkSquare = {
+    target: $('#buddy').hasClass('player'),
+    num: 0,
+    getSquare(){
+        let square = this
+        const selected = square.target
+        console.log(selected);   
+        // const selectedID = $(selected).attr('id');
+        // const selectedClass = $(selected).attr('class'); //stores class information  
         
-// }
 }
+};
 
-// $('body').keypress(targetSquare.getSquare);
+  
+
+// $('body').keypress(checkSquare.getSquare);
         
