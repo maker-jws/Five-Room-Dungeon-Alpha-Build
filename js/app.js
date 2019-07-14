@@ -2,8 +2,8 @@ let timer;
 let timelimit;
 let counter=10;
 let timeOut = false;
-let monsterInterval =300;
-$(`#wrapper`).attr('visibility','hidden');
+let monsterInterval =500;
+let here = $(`div.player`).attr('id');  
 $(`#wrapper`).hide();
 startGame(25);
 
@@ -22,7 +22,6 @@ function setup(){
         $(`#timerDisplay`).append($timerDisplay);    
     });
 }
-
 function startGame(timed){
     timelimit = timed;
     $(`#playerCol`).hide();
@@ -32,9 +31,10 @@ function startGame(timed){
         gameClock.changeClock(10);
         counter++;
         enemyBehavior();     
-        },12); 
+        
+    },12); 
+    return timer;
 }
-
 const gameClock =  {
     minute: timelimit,
     second: 00,
@@ -50,9 +50,8 @@ const gameClock =  {
        this.ms=100;
        this.second--;
 
-       setTimeout(player.interact,1); //updates interaction 1/sec
-       setTimeout(checkEnemyDistance,1) // checks distance 1/second
-       
+       setTimeout(player.interact,10); //updates interaction 1/sec
+       setTimeout(checkEnemyDistance,monsterInterval*6);
       } else if (this.second<=0){
         this.second = 59;
         this.minute--;
@@ -82,27 +81,38 @@ function endGame(){
         } 
         
 };
-function enemyBehavior(){
+function enemyBehavior(){   
+    
     if (counter%monsterInterval===0){                                 //this could be moved to enemy Behavior
         for(let i=0;i<gameEnemies.length;i++){
             setTimeout(function(){ 
+                setTimeout(checkEnemyDistance);
                 gameEnemies[i].choosePath();
                 },10);  
             }
     }
-}
-function checkEnemyDistance(){
-    for(let i=0;i<gameEnemies.length;i++){
-        
-        const distanceX = gameEnemies[i]['x']-player.x;
-        const distanceY = gameEnemies[i]['y']-player.y;
-        const vector = [distanceY, distanceX]
-        console.log(vector, `<<monster${i}`);
-        if(gameEnemies[i]['x']===player.x){     
-        } else if(gameEnemies[i]['y']===player.y){
-        }
-        }        
 }        
+function addInventoryItem(){
 
+}
 
-function battle(){}
+function battle(attacker, attacked){
+    console.log(`${attacker} moves to attack ${attacked}`)
+}
+const checkSquare = {
+    target: $('#buddy').hasClass('player'),
+    num: 0,
+    getSquare(){
+        let square = this
+        const selected = square.target
+        console.log(selected);   
+        // const selectedID = $(selected).attr('id');
+        // const selectedClass = $(selected).attr('class'); //stores class information  
+        
+}
+};
+
+ // console.log('same row') 
+ // console.log('same column') 
+ // console.log(vector, `<<monster${i}`);
+ // console.log(gameEnemies[i]['distance'], `<<monster${i} distance`);

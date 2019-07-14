@@ -131,14 +131,18 @@ body{
 }
 
 .playerAttacked{
-  background-color: lightcoral;
+  background-color: rgba(240, 128, 128, 0.7);
   z-index: 1;
 }
+
 .enemy{
   border-radius: 30%;
   border: .5px solid magenta;
 }
-
+.enemyAttacked{
+  background-color: rgba(238, 76, 143, 0.7);
+  z-index: 1;
+}
 #divider{
   background: url('../single_border.png'); 
   background-size: contain;

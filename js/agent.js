@@ -94,6 +94,7 @@ const player = {
     interact(){
             if($('.player').hasClass('treasure')){
                 console.log('you found treasure');
+                //addInventory item()
     
             } else if ($('.player').hasClass('enemy')){
                 console.log('you grapple with the enemy');
