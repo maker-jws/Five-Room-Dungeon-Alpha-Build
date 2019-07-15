@@ -4,7 +4,7 @@ rgba(104, 252, 252, 0.5)
 rgba(30, 105, 190, 0.5) */
 
 body{
-  background-image: url("../cloud-drawing-texture-1.png");
+  background-image: url("../img/cloud-drawing-texture-1.png");
   /* background: linear-gradient(180deg, darkgray 0% , lightgray 18%, red  100%); */
   background-position: center;
   background-repeat: no-repeat;
@@ -37,6 +37,10 @@ body{
 #game-info{ 
   display: block;
   margin: 1rem;
+}
+#gameMessage{
+  width: auto;
+  height: 3rem; 
 }
 .game-info-item{
   margin: .1em .3em;
@@ -72,19 +76,24 @@ body{
 /* .gameContent{
   background-color: rgba(255, 255, 255, 0.5);
 } */
+#instructions{
+  width: 25vw;
+}
+.instructions{
+  width: 25px;
+}
+#list-instructions{
+  list-style: none;
+}
 #timerDisplay{
-  margin:0;
   padding:0;
   font-size: .8rem;
-  margin: 1rem;
-  text-align: center;
-  width: 20vw;
+  margin: 1rem 0;
   background-color: white;
 }
 #grid-holder0{
   box-sizing: border-box;
-  background-color: lightblue;
-  min-width: 525px;
+  background-color: lightgray;
   text-align: center;
   
 }
@@ -100,7 +109,7 @@ body{
 .cell{
   width: 1.3rem; 
   height: 1.3rem;
-  border: 1px solid rgba(0,0,0,.1);
+  border: 1px solid rgba(0,0,0,0);
 }
 .door{
   background-color: lightblue;
@@ -131,21 +140,29 @@ body{
 }
 
 .playerAttacked{
-  background-color: lightcoral;
+  background-color: rgba(240, 128, 128, 0.7);
   z-index: 1;
 }
+
 .enemy{
   border-radius: 30%;
   border: .5px solid magenta;
 }
-
-#divider{
-  background: url('../single_border.png'); */
+.enemyAttacked{
+  background-color: rgba(238, 76, 143, 0.7);
+  z-index: 1;
+  width: 10px;
+  height: 10px;
+  text-align: center;
+  padding: .1rem 0  ;
+}
+/* #divider{
+  background: url('../single_border.png'); 
   background-size: contain;
   background-position: center;
   height: 2em;
   padding-bottom: 5px;
-}
+} */
 #playerHP{
   border: 0px solid black;
 }
@@ -153,7 +170,7 @@ body{
   font-weight: bolder; 
 }
 .torches{
-    background: url("../fire--v2.png");
+    background: url("../img/fire--v2.png");
     background-size: contain;
     background-color: rgba(190, 190, 190, 0.24);
     border-radius: 50%;
@@ -161,36 +178,17 @@ body{
   
 }
 .heartBox{
-  background: url("../heart--v2.png");
+  background: url("../img/heart--v2.png");
   background-size: contain;
-  background-color: red;
+  background-color: rgba(255, 0, 0, 0.24);
   border-radius: 50%;
   margin: .1em .3em;
 }
-/* 
- .arrow-up {
 
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 1px solid black;
-  }
-  
-  .arrow-down { 
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    
-    border-top: 1px solid #f00;
-  }
-  
-  .arrow-right {
-    border-top: 6px solid transparent;
-    border-bottom: 6px solid transparent;
-    
-    border-left: 1px solid green;
-  }
-  
-  .arrow-left {  
-    border-top: 6px solid transparent;
-    border-bottom: 6px solid transparent; 
-    border-right:1px solid blue; 
-  }  */
+.speedBoots{
+  background: url("../img/runner.png");
+  background-size: contain;
+  background-color: rgba(165, 42, 42, 0.24);
+  border-radius: 50%;
+  margin: .1em .3em;
+}

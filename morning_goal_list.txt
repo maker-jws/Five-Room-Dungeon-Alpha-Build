@@ -1,6 +1,0 @@
-1. add attack feature to player
-2. add 'hunt' behavior to enemies (if player.x, player.y)
-    {if this.x is < player.x set direction to "left"}
-    {if this.x is > player.x set direction to "right}
-    {if this.y is < player.y this.direction to "up"}
-    {if this.y is > player.y this.direction to "down"}
