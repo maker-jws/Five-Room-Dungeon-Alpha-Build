@@ -3,7 +3,7 @@ let timelimit;
 let counter=10;
 let timeOut = false;
 let monsterInterval =500;
-let here = $(`div.player`).attr('id');  
+  
 $(`#wrapper`).hide();
 startGame(25);
 
@@ -52,6 +52,7 @@ const gameClock =  {
 
        setTimeout(player.interact,10); //updates interaction 1/sec
        setTimeout(checkEnemyDistance,monsterInterval*6);
+       updateGameInfo(); 
       } else if (this.second<=0){
         this.second = 59;
         this.minute--;
@@ -62,10 +63,10 @@ const gameClock =  {
 }
 }
 function updateGameInfo(){
-    
     $(`#playerName`).text(`${player.name}'s Stats`);
     player.addDisplayItems();
-    $(`#playerInventory`).text(`${player.inventory} in your bag`);   
+    
+    for(let())  
 }
 function endGame(){
     console.log('game over');
@@ -83,7 +84,7 @@ function endGame(){
 };
 function enemyBehavior(){   
     
-    if (counter%monsterInterval===0){                                 //this could be moved to enemy Behavior
+    if (counter%monsterInterval===0){                                 
         for(let i=0;i<gameEnemies.length;i++){
             setTimeout(function(){ 
                 setTimeout(checkEnemyDistance);
@@ -92,12 +93,33 @@ function enemyBehavior(){
             }
     }
 }        
-function addInventoryItem(){
-
+function addInventoryItem(num){
+   for(let i = 0;i<num; i++){
+       let location=Math.floor(Math.random()*randomTreasure.length-1)
+       let item = randomTreasure[location]
+       player.inventory.push(item);
+       randomTreasure.splice(location,1)
+       console.log(randomTreasure.length)
+   } 
+}
+function attackRoll(dice,mod="0"){
+    let total=0;
+    for(let i=0;i<3;i++){
+        const roll = Math.floor(Math.random()*dice)+1
+        total=total+roll;
+    }
+    total=total+mod
+    return total
 }
 
-function battle(attacker, attacked){
+function battle(attacker, attacked,mod="0"){
     console.log(`${attacker} moves to attack ${attacked}`)
+    let attackerRolled = attackRoll(6,mod)
+    let attackedRolled = attackRoll(6,mod)
+    console.log(attackerRolled, "<<attacker",attackedRoller, "<<attacked");  
+    if (attackerRolled>=attackedRolled){
+        attacked.heart--;
+    }
 }
 const checkSquare = {
     target: $('#buddy').hasClass('player'),

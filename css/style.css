@@ -38,6 +38,10 @@ body{
   display: block;
   margin: 1rem;
 }
+#gameMessage{
+  width: auto;
+  height: 3rem; 
+}
 .game-info-item{
   margin: .1em .3em;
   padding: .1em;
@@ -73,12 +77,9 @@ body{
   background-color: rgba(255, 255, 255, 0.5);
 } */
 #timerDisplay{
-  margin:0;
   padding:0;
   font-size: .8rem;
-  margin: 1rem;
-  text-align: center;
-  width: 20vw;
+  margin: 1rem 0;
   background-color: white;
 }
 #grid-holder0{
@@ -142,6 +143,10 @@ body{
 .enemyAttacked{
   background-color: rgba(238, 76, 143, 0.7);
   z-index: 1;
+  width: 10px;
+  height: 10px;
+  text-align: center;
+  padding: .1rem 0  ;
 }
 #divider{
   background: url('../single_border.png'); 

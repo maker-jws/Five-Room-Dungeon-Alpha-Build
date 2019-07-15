@@ -28,3 +28,16 @@ const mapPack = [
     [  1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,  1,  1,  1    ]  //24
     ]
 ]
+
+const randomTreasure = [
+    "A small round coin with a hole in it", 
+    "A tiny doll with one eye", 
+    "a rag that absorbs any stain", 
+    "human skull",
+    "A small charm made out of seashells", 
+    "20 copper", 
+    "A whistle made from a snail shell", 
+    "12 silver", 
+    "6 gold piece", 
+    "Citrine figurine", 
+]

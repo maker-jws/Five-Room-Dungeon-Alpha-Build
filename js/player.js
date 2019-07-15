@@ -1,18 +1,17 @@
 const freeSpace = !$("div").hasClass('wall'); 
-
 const player = {
     name: "",
     torch: 3,
     heart: 4,
     armor: 2,
-    speed: 100,
+    speed: 20,
     inventory: ["crumbs", "dog teeth",  "chewing gum(chewed)"],
     x: 0, 
     y: 0,
     map: 0,
     direction: "",
     attackdir: "",
-    lastLocation: [undefined,undefined],
+    searching: false,
     
     checkHealth: function (){
     },
@@ -25,48 +24,47 @@ const player = {
         console.log(`${this.name} joined the game`);
         console.log(this);
     },
-    attack(){ //renders an attack in the players current direction(on a delay related tied to player speed )
-        var character = this;
-        if (this.attackdir==="up"){ //modify player.direction to attackDir created by attackListener 
-            setTimeout(
-            function() { 
-                $(`#cell_${character.map}_${character.y-1}_${character.x}`).addClass('playerAttacked') // can this be replaced with 
-        }, 1);        
-            setTimeout(function() { console.log(`${character.name} finishes his attack`)
-            $( "div" ).removeClass( "playerAttacked" );
-            }, this.speed*3);    
-        } else if (this.attackdir==="down"){
-            setTimeout(
-                function() { 
-                    console.log(`${character.name} attacks at his front`);
-                    $(`#cell_${character.map}_${character.y+1}_${character.x}`).addClass('playerAttacked')
-    
-            }, 1);
-                setTimeout(function() { console.log(`${character.name} finishes his attack`)
-                $( "div" ).removeClass( "playerAttacked" );
-                }, this.speed*3);  
-        } else if (this.attackdir==="left"){
-            setTimeout(
-            function() { 
-                console.log(`${character.name} attacks at his front`);
-                $(`#cell_${character.map}_${character.y}_${character.x-1}`).addClass('playerAttacked')
 
-        }, 1);
-            setTimeout(function() { console.log(`${character.name} finishes his attack`)
-            $( "div" ).removeClass( "playerAttacked" );
-            }, this.speed*3);
+    // function battle(attacker, attacked,mod="0"){
+    //     console.log(`${attacker} moves to attack ${attacked}`)
+    //     let attackerRolled = attackRoll(6,mod)
+    //     let attackedRolled = attackRoll(6,mod)
+    //     console.log(attackerRolled, "<<attacker",attackedRoller, "<<attacked");  
+    //     if (attackerRolled>=attackedRolled){
+    //         attacked.heart--;
+    //     }
+    // }
 
-        } else if (this.attackdir==="right"){
-            setTimeout(
-                function() { 
-                    console.log(`${character.name} attacks at his front`);
-                    $(`#cell_${character.map}_${character.y}_${character.x+1}`).addClass('playerAttacked')
-    
-            }, 1);
-                setTimeout(function() { console.log(`${character.name} finishes his attack`)
-                $( "div" ).removeClass( "playerAttacked" );
-                }, this.speed*3);
-        } 
+    attack(direction){ //renders an attack in the players current direction(on a delay related tied to player speed )
+        var character = this; //not sure I need this.
+        this.attackdir == direction;
+        if (direction=="up"){
+            $(`#cell_${character.map}_${character.y-1}_${character.x}`).addClass(`playerAttacked`);
+            if ($(`#cell_${character.map}_${character.y-1}_${character.x}`).hasClass('enemy')){
+                console.log('a hit')
+
+            }
+        } else if (direction=="down"){
+            $(`#cell_${character.map}_${character.y+1}_${character.x}`).addClass(`playerAttacked`);
+            if ($(`#cell_${character.map}_${character.y+1}_${character.x}`).hasClass('enemy')){
+                console.log('a hit')
+            }  
+        } else if(direction =="left"){
+            $(`#cell_${character.map}_${character.y}_${character.x-1}`).addClass(`playerAttacked`);
+            if ($(`#cell_${character.map}_${character.y}_${character.x-1}`).hasClass('enemy')){
+                console.log('a hit')
+            } 
+        } else if(direction==="right"){
+            $(`#cell_${character.map}_${character.y}_${character.x+1}`).addClass(`playerAttacked`);
+            if ($(`#cell_${character.map}_${character.y}_${character.x+1}`).hasClass('enemy')){
+                console.log('a hit')
+            }  
+        } else{}
+        
+        // Clears the class added by player attack
+        setTimeout(function() { console.log(`${character.name} finishes his attack`);
+        $('div').removeClass('playerAttacked');
+        }, this.speed*20);       
     },
     render(newClass){
         let character=this;
@@ -82,6 +80,8 @@ const player = {
          
     },
     addDisplayItems(){
+        $(`#playerHP`).empty();
+        $(`#playerTorch`).empty()  
         for (let h=1;h<=this.heart;h++){
             const heartBox = $(`<div class="cell heartBox" heartNum ="${h}"></div>`)
             $(`#playerHP`).append(heartBox); 
@@ -92,23 +92,22 @@ const player = {
         }
     },
     interact(){
-            if($('.player').hasClass('treasure')){
-                console.log('you found treasure');
-                //addInventory item()
-    
-            } else if ($('.player').hasClass('enemy')){
-                console.log('you grapple with the enemy');
-            } else{};
+            if($('.player').hasClass('treasure')){        
+                console.log('you find some treasure');
+                $(`#gameMessage`).empty();
+                $(`#gameMessage`).text(`....you found treasure`);
+                addInventoryItem(3); 
+                player.torch=player.torch+(Math.floor(Math.random()*3)-1); //add torch
+                $('.player').removeClass('treasure'); // clears the treasure from the board
+
+            } else if ($('.tunnel').hasClass('player')){
+                $(`#gameMessage`).text('...you descend into the tunnel...');
+                //remove player 
+                //populate player at tunnel that is not player.tunnel
+            } else{$(`#gameMessage`).empty()}; // empties the 
             //checktile for monster >> this.attack()
             //checktile for lock
     },
-    search(){
-        console.log('you are searching your surroundings')
-        this.render('playerAttacked');
-    },
-    // checkEnemy(){}, //if attackdirection has class Enemy // game.battle.
-    // checkLock(){}, //if return false (do nothing ie continue movement if true initiate picklock)
-    // checkWall(){}, //if return false (do nothing ie continue movement if true initiate picklock)
     move: function(){ //adjusts 
         
         if (this.direction === "up" && this.y>0 ){   
@@ -159,6 +158,7 @@ const player = {
     }   
 }
 
+
 //listener for player
 $('body').keypress(function(e){      //controls player movement & listens for interact keys: [f q]
     const keyed = event.which;
@@ -175,28 +175,21 @@ $('body').keypress(function(e){      //controls player movement & listens for in
     } else if (keyed === 100) {
         player.direction="right";
         player.move();
-    } else if (keyed === 102 ||  keyed == 113 ) { //triggers attack in attack direction
-        player.search();
-        return keyed;
     } else {}
-    
     player.render('player')
 });
 $('body').keydown(function(e){  //controls player attack
     const keyed = event.which;
     // console.log(event.which)
     if (keyed === 38){
-       player.attackdir="up";
-       player.attack(); 
+       player.attack("up");
     } else if (keyed === 40) {
-        player.attackdir="down"; 
-        player.attack()
+        player.attack("down")
     } else if (keyed === 37) {
-        player.attackdir="left";
-        player.attack(); 
+        player.attack("left"); 
     } else if (keyed === 39) {
-        player.attackdir="right";
-        player.attack();
+        player.attack("right");
     } else {}
-    player.render('player');
+    
 });
+
