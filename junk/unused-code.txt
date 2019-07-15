@@ -1,4 +1,3 @@
-
 //DOOR HOPPING
 console.log(doorLocations);
     for(let m=1;m<=Object.keys(doorLocations).length;m++){
@@ -124,4 +123,20 @@ const pathFinder = () => {
         // console.log('button is working')
 
 // ENEMY NAVIGATION:
-const options = ["up", "up","up","right","right", "right", "down","down","left","left", "up","right","down","left"];
+ // console.log('same row') 
+ // console.log('same column') 
+ // console.log(vector, `<<monster${i}`);
+ // console.log(gameEnemies[i]['distance'], `<<monster${i} distance`);
+
+ const checkSquare = {
+    target: $('#buddy').hasClass('player'),
+    num: 0,
+    getSquare(){
+        let square = this
+        const selected = square.target
+        console.log(selected);   
+        // const selectedID = $(selected).attr('id');
+        // const selectedClass = $(selected).attr('class'); //stores class information  
+        
+}
+};

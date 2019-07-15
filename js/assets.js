@@ -30,6 +30,7 @@ const mapPack = [
 ]
 
 const randomTreasure = [
+    "crumbs", "dog teeth",  "chewing gum(chewed)",
     "A small round coin with a hole in it", 
     "A tiny doll with one eye", 
     "a rag that absorbs any stain", 

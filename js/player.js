@@ -5,7 +5,7 @@ const player = {
     heart: 4,
     armor: 2,
     speed: 20,
-    inventory: ["crumbs", "dog teeth",  "chewing gum(chewed)"],
+    inventory: ['one rusty knife'],
     x: 0, 
     y: 0,
     map: 0,
@@ -102,7 +102,10 @@ const player = {
 
             } else if ($('.tunnel').hasClass('player')){
                 $(`#gameMessage`).text('...you descend into the tunnel...');
-                //remove player 
+                const oldTunnel = $('.tunnel')[0]['id'];
+                const newTunnel = $('.tunnel')[0]['id'];
+                $(oldTunnel).removeClass('player');
+                player.populate(player.name,player.map,16,8);  
                 //populate player at tunnel that is not player.tunnel
             } else{$(`#gameMessage`).empty()}; // empties the 
             //checktile for monster >> this.attack()

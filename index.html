@@ -9,35 +9,40 @@
     <title>5 Room Dungeon Generator</title>
 </head>
 <body>  
-    <div >
+    <div>
     <div class="container-fluid">
         <div class="col align-middle" id="header">
-                <div class='row justify-content-center gameContent'><h1 id="title">MAP SCREEN</h1></div>
+                <div class='row justify-content-center gameContent wrapper'>
+                    <div class="nav justify-content-center playerInfo"><span id="playerName"></span></div>
+                    <div class="nav justify-content-center playerInfo" ><span id="playerHP" class="row justify-content-center playerInfo"></span></div>
+                    <div class='nav justify-content-center playerinfo' id="timerDisplay"></div>
+                    <div class="nav justify-content-center playerInfo" ><span id="playerTorch" class="row justify-content-center playerInfo"></span></div>
+                </div>
                 <div class='row justify-content-center gameContent' id="startButton"></div>
         </div>
     </div>
     <div class="container-fluid" >
         <div class="row justify-content-center" id="game-space">
-                <div class="row justify-content-center" id="wrapper">
+                <div class="row justify-content-center wrapper">
                     <div class="col-7" id="grid-holder0"></div>
                     <div class="col" id="playerCol">
-                        <div class='row justify-content-center playerinfo' id="timerDisplay"></div> 
-                        <div class="row justify-content-center playerInfo"><span id="playerName"></span></div>
-                        <div class="row justify-content-center playerInfo" ><span id="playerHP" class="row justify-content-center playerInfo"></span></div>
-                        <div class="row justify-content-center playerInfo" ><span id="playerTorch" class="row justify-content-center playerInfo"></span></div>
-                        <div class="row justify-content-center playerInfo" ><ul id="playerInventory"></ul></div>
-                        <div class="row justify-content-center playerInfo"><h5>Game Status:</h5><span id="gameMessage" >X</span></div>
-                        <div class="row justify-content-center playerInfo" id="game-info">
-                                <div class="col-7 game-info-item">Doors:<span id="doorCounter" >X</span></div>
-                                <div class="col-7 game-info-item">Treasure:<span id="treasureCounter" >X</span></div>
-                                <div class="col-7 game-info-item">Player Position:<span id="playerXY" >X</span></div>
-                                <div class="col-7 game-info-item">Monster Names:<span id="enemyName" >X</span></div>
-                        </div>
-                        
+                        <div class="row justify-content-center playerInfo" id="game-info"></div>  
                     </div>
                 </div>    
           </div>  
     </div>
+    <div class="container-fluid">
+        <div class="row fixed-bottom playerInfo wrapper">
+            <div class="row" id="playerInventory">Player Inventory: </div>
+        </div>
+    </div>    
+    <!-- <div class='row fixed-bottom'>
+        <div class="button btn-md playerInfo"><h5>Game Status:</h5><span id="gameMessage" >000</span></div>
+        <div class="button btn-md game-info-item">Doors:<span id="doorCounter" >000</span></div>
+        <div class="button btn-md game-info-item">Treasure:<span id="treasureCounter" >000</span></div>
+        <div class="button btn-md game-info-item">Player Position:<span id="playerXY" >000</span></div>
+        <div class="button btn-md game-info-item">Monster Names:<span id="enemyName" >000</span></div>
+    </div> -->
 </div>   
 </body>
 <scrip>

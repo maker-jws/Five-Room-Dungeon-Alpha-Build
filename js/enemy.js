@@ -1,4 +1,5 @@
 const gameEnemies = [];
+const options = ["up", "up","up","right","right", "right", "down","down","left","left", "up","right","down","left"];
 const choices = options.slice();
 const statArray = [
     {name:"goblin", 
@@ -7,27 +8,23 @@ const statArray = [
     cell: 20,
     row: 20,
     map:0
-    }
-    ,
+    },
     {name:"hobgoblin",
      hp:3,
      color: "brown",
      cell: 10,
      row:6,
      map:0
-    
     },
-
      {name:"orc",
       hp:5,
       color:"darkgreen",
       cell: 18,
       row: 6,
       map:0
-    },
-    
+    }, 
     {name:"ooze",
-    hp:5,
+    hp:10,
     color:"darkblue",
     cell: 22,
     row: 18,

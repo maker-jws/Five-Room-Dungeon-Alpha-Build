@@ -4,7 +4,8 @@ let counter=10;
 let timeOut = false;
 let monsterInterval =500;
   
-$(`#wrapper`).hide();
+$(`.wrapper`).hide();
+
 startGame(25);
 
 function setup(){
@@ -12,7 +13,7 @@ function setup(){
     const $timerDisplay = $("<div class=clock id=display> Time Remaining:  <span class=clock id=minute></span> || <span class=clock id=second></span></div>"); //|| <span class=clock id=ms></span>
     
     $(`#startButton`).append($startClockButton);                        
-    $(`#wrapper`).show();
+    $(`.wrapper`).show();
     $('#start').click( function () {
         $startClockButton.remove();                                                
         player.populate("buddy",0,23,1);
@@ -52,7 +53,7 @@ const gameClock =  {
 
        setTimeout(player.interact,10); //updates interaction 1/sec
        setTimeout(checkEnemyDistance,monsterInterval*6);
-       updateGameInfo(); 
+       setTimeout(updateGameInfo, 2500); 
       } else if (this.second<=0){
         this.second = 59;
         this.minute--;
@@ -64,9 +65,7 @@ const gameClock =  {
 }
 function updateGameInfo(){
     $(`#playerName`).text(`${player.name}'s Stats`);
-    player.addDisplayItems();
-    
-    for(let())  
+    player.addDisplayItems(); 
 }
 function endGame(){
     console.log('game over');
@@ -101,6 +100,19 @@ function addInventoryItem(num){
        randomTreasure.splice(location,1)
        console.log(randomTreasure.length)
    } 
+   if (randomTreasure.length<2){
+       for(let i=0;i<player.inventory.length/2;i++){
+        let location=Math.floor(Math.random()*player.inventory.length-1)
+        let item = randomTreasure[location]
+        randomTreasure.push(item);
+       }
+   }
+
+   for(let i=0;i<player.inventory.length-1;i++){
+    const item = $(`<li class=playerItem id=${i}></li>`)
+    item.text(player.inventory[i])
+    $('#playerInventory').append(item);
+} 
 }
 function attackRoll(dice,mod="0"){
     let total=0;
@@ -134,7 +146,4 @@ const checkSquare = {
 }
 };
 
- // console.log('same row') 
- // console.log('same column') 
- // console.log(vector, `<<monster${i}`);
- // console.log(gameEnemies[i]['distance'], `<<monster${i} distance`);
+
