@@ -17,23 +17,36 @@
                     <div class="nav justify-content-center playerInfo" ><span id="playerHP" class="row justify-content-center playerInfo"></span></div>
                     <div class='nav justify-content-center playerinfo' id="timerDisplay"></div>
                     <div class="nav justify-content-center playerInfo" ><span id="playerTorch" class="row justify-content-center playerInfo"></span></div>
+                    <div class="nav justify-content-center playerInfo" ><span id="playerSpeed" class="row justify-content-center playerInfo"></span></div>
                 </div>
                 <div class='row justify-content-center gameContent' id="startButton"></div>
+                <div class="row justify-content-center gameContent" id="instructions">
+                            <div id="list-instructions" class='col'>
+                            <div class=row>
+                                <div>Collect all of the </div> <div class="cell"></div><div class="treasure cell"></div></div>
+                                <div class="row">Avoid the monsters <div class="cell"></div>
+                                <div class="cell instructions" style="background-color: green"></div>
+                                <div class="cell instructions" style="background-color: brown; width: 1.3rem"></div>
+                                <div class="cell instructions" style="background-color: gray"></div>
+                                <div class="cell instructions" style="background-color: lightgreen"></div>
+                                <div class="cell instructions" style="background-color: darkblue"></div>
+                                <div class="cell instructions" style="background-color: cyan"></div>
+                            </div>
+                            <div class="row"><div>Escape the dungeon by finding</div><div class="cell"></div><div class="cell goal"></div></div>
+                    </div>
+                </div>
         </div>
     </div>
     <div class="container-fluid" >
         <div class="row justify-content-center" id="game-space">
                 <div class="row justify-content-center wrapper">
-                    <div class="col-7" id="grid-holder0"></div>
-                    <div class="col" id="playerCol">
-                        <div class="row justify-content-center playerInfo" id="game-info"></div>  
-                    </div>
+                        <div class="col" id="grid-holder0"></div>    
                 </div>    
           </div>  
     </div>
     <div class="container-fluid">
         <div class="row fixed-bottom playerInfo wrapper">
-            <div class="row" id="playerInventory">Player Inventory: </div>
+            <div class="row"><bold>Player Inventory:</bold><span id="playerInventory"></span></div>
         </div>
     </div>    
     <!-- <div class='row fixed-bottom'>

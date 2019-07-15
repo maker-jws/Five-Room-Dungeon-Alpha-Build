@@ -2,11 +2,11 @@ let timer;
 let timelimit;
 let counter=10;
 let timeOut = false;
-let monsterInterval =500;
+let monsterInterval =200;
   
 $(`.wrapper`).hide();
 
-startGame(25);
+startGame(5);
 
 function setup(){
     const $startClockButton = $("<button class=clock id=start>Start Game</button>");
@@ -15,10 +15,12 @@ function setup(){
     $(`#startButton`).append($startClockButton);                        
     $(`.wrapper`).show();
     $('#start').click( function () {
-        $startClockButton.remove();                                                
-        player.populate("buddy",0,23,1);
+        $startClockButton.remove(); 
+        $('#instructions').remove();                                               
         parseMap();
-        updateGameInfo() 
+        updateGameInfo()
+        createMonsters(1) 
+        
         $(`#playerCol`).show();
         $(`#timerDisplay`).append($timerDisplay);    
     });
@@ -26,15 +28,14 @@ function setup(){
 function startGame(timed){
     timelimit = timed;
     $(`#playerCol`).hide();
+    player.populate("buddy",0,23,1);
     setup();
-    createMonsters();
     const timer = setInterval(function(){
-        gameClock.changeClock(10);
-        counter++;
-        enemyBehavior();     
-        
-    },12); 
-    return timer;
+        gameClock.changeClock();
+        enemyBehavior();
+        endGame();
+        counter++;    
+    },12);
 }
 const gameClock =  {
     minute: timelimit,
@@ -46,40 +47,40 @@ const gameClock =  {
        $(`#second`).text(`   ${gameClock.second} `);
        $(`#minute`).text(`   ${gameClock.minute}`); 
        
-       
        if (this.ms <0){
        this.ms=100;
        this.second--;
-
        setTimeout(player.interact,10); //updates interaction 1/sec
-       setTimeout(checkEnemyDistance,monsterInterval*6);
-       setTimeout(updateGameInfo, 2500); 
+       setTimeout(checkEnemyDistance,monsterInterval); 
+       setTimeout(updateGameInfo,500);
       } else if (this.second<=0){
         this.second = 59;
         this.minute--;
+        createMonsters(1)
       } else if (this.minute<0){
         timeOut = true;
-        endGame();
       } else {}
 }
 }
 function updateGameInfo(){
     $(`#playerName`).text(`${player.name}'s Stats`);
     player.addDisplayItems(); 
+    
 }
 function endGame(){
-    console.log('game over');
-    
-    //clear map()
-    //create modal with current time - 
-    //reason for game over 
-        if  (timeOut === true){
+    if (player.heart<=0 || player.torch<=0 || timeOut === true){
+        console.log('game over');
+        $(`#grid-holder0`).hide
+        if  (timeOut=true){
             clearInterval(timer);
             alert('time has run out');
+            !timeOut;
         } else if (player.hp<0){
             alert('Your player has succumb to their injuries');
         } 
-        
+        alert("Your time in the dungeon has ended");
+        location.reload();
+    }        
 };
 function enemyBehavior(){   
     
@@ -92,38 +93,14 @@ function enemyBehavior(){
             }
     }
 }        
-function addInventoryItem(num){
-   for(let i = 0;i<num; i++){
-       let location=Math.floor(Math.random()*randomTreasure.length-1)
-       let item = randomTreasure[location]
-       player.inventory.push(item);
-       randomTreasure.splice(location,1)
-       console.log(randomTreasure.length)
-   } 
-   if (randomTreasure.length<2){
-       for(let i=0;i<player.inventory.length/2;i++){
-        let location=Math.floor(Math.random()*player.inventory.length-1)
-        let item = randomTreasure[location]
-        randomTreasure.push(item);
-       }
-   }
-
-   for(let i=0;i<player.inventory.length-1;i++){
-    const item = $(`<li class=playerItem id=${i}></li>`)
-    item.text(player.inventory[i])
-    $('#playerInventory').append(item);
-} 
-}
-function attackRoll(dice,mod="0"){
+function attackRoll(dice){
     let total=0;
     for(let i=0;i<3;i++){
         const roll = Math.floor(Math.random()*dice)+1
         total=total+roll;
     }
-    total=total+mod
-    return total
+    return total;
 }
-
 function battle(attacker, attacked,mod="0"){
     console.log(`${attacker} moves to attack ${attacked}`)
     let attackerRolled = attackRoll(6,mod)
@@ -133,17 +110,9 @@ function battle(attacker, attacked,mod="0"){
         attacked.heart--;
     }
 }
-const checkSquare = {
-    target: $('#buddy').hasClass('player'),
-    num: 0,
-    getSquare(){
-        let square = this
-        const selected = square.target
-        console.log(selected);   
-        // const selectedID = $(selected).attr('id');
-        // const selectedClass = $(selected).attr('class'); //stores class information  
-        
-}
-};
 
+//DIAGNOSTIC CLICK EVENT
+$('body').click(function(){
+    console.log(event.target)
+});
 

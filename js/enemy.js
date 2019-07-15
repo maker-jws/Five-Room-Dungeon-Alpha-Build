@@ -1,43 +1,12 @@
 const gameEnemies = [];
 const options = ["up", "up","up","right","right", "right", "down","down","left","left", "up","right","down","left"];
 const choices = options.slice();
-const statArray = [
-    {name:"goblin", 
-    hp:2, 
-    color:"lightgreen",
-    cell: 20,
-    row: 20,
-    map:0
-    },
-    {name:"hobgoblin",
-     hp:3,
-     color: "brown",
-     cell: 10,
-     row:6,
-     map:0
-    },
-     {name:"orc",
-      hp:5,
-      color:"darkgreen",
-      cell: 18,
-      row: 6,
-      map:0
-    }, 
-    {name:"ooze",
-    hp:10,
-    color:"darkblue",
-    cell: 22,
-    row: 18,
-    map:0
-  }
-]
-
 class Enemy {
     constructor(stats) {
         this.name = stats.name;
         this.heart = stats.hp;
         this.armor = 2;
-        this.speed = 250;
+        this.speed = 200;
         this.color = stats.color;
         this.x = stats.cell; 
         this.y = stats.row;
@@ -54,8 +23,12 @@ class Enemy {
         setTimeout( function(){     
             $('div.player').append(`<div class=enemyAttacked></div>`); 
             //trigger Battle Calculation
-            this.attackdir=""  
-        }, this.speed*4);     
+            this.attackdir="" 
+            const attack = attackRoll(6);
+            if (attack>12){
+                player.heart--
+            }
+        }, this.speed*8);     
         
         setTimeout(function() { //console.log(`${this.name} finishes his attack`)
         $('div.player').empty();
@@ -99,15 +72,14 @@ class Enemy {
     };        
 };
 
-function createMonsters(num){
-    num=statArray.length
-    for (let i=0; i<num; i++){
-        const monster = new Enemy(statArray[i]);
-        gameEnemies.push(monster);
-        console.log(`${statArray[i].name} created!`)
+function createMonsters(){  //lets say I wanted 20 
+    // num=statArray.length
+        for (let m=0;m<statArray.length;m++){
+            const monster = new Enemy(statArray[m]);
+            gameEnemies.push(monster);
+            // console.log(`${statArray[i].name} created!`)
+        }  
     }
-}
-
 function checkEnemyDistance(){
     for(let i=0;i<gameEnemies.length;i++){
         const distanceX = player.x-gameEnemies[i]['x']; // if return negative number player is left if positive, right
@@ -122,6 +94,3 @@ function checkEnemyDistance(){
     }                       
 }   
 
-$('body').click(function(){
-    console.log(event.target)
-});

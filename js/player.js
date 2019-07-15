@@ -5,7 +5,7 @@ const player = {
     heart: 4,
     armor: 2,
     speed: 20,
-    inventory: ['one rusty knife'],
+    inventory: [],
     x: 0, 
     y: 0,
     map: 0,
@@ -14,6 +14,9 @@ const player = {
     searching: false,
     
     checkHealth: function (){
+        if (this.health<=0){
+            endGame();
+        }
     },
     populate: function(alias, m, r, c){ 
         this.name = alias;
@@ -81,7 +84,9 @@ const player = {
     },
     addDisplayItems(){
         $(`#playerHP`).empty();
-        $(`#playerTorch`).empty()  
+        $(`#playerTorch`).empty()
+        $(`#playerSpeed`).empty() 
+        
         for (let h=1;h<=this.heart;h++){
             const heartBox = $(`<div class="cell heartBox" heartNum ="${h}"></div>`)
             $(`#playerHP`).append(heartBox); 
@@ -90,13 +95,19 @@ const player = {
             const torches = $(`<div class="cell torches" torchNum ="${t}"></div>`)
             $(`#playerTorch`).append(torches); 
         }
+        for (let s=1;s<=this.speed/10;s++){
+            const boots = $(`<div class="cell speedBoots" speed ="${s}"></div>`)
+            $(`#playerSpeed`).append(boots); 
+        }
+         
     },
     interact(){
             if($('.player').hasClass('treasure')){        
                 console.log('you find some treasure');
                 $(`#gameMessage`).empty();
                 $(`#gameMessage`).text(`....you found treasure`);
-                addInventoryItem(3); 
+                addInventoryItem(1); 
+
                 player.torch=player.torch+(Math.floor(Math.random()*3)-1); //add torch
                 $('.player').removeClass('treasure'); // clears the treasure from the board
 
@@ -161,6 +172,28 @@ const player = {
     }   
 }
 
+//Player Specific Game Function 
+function addInventoryItem(num){
+    $('#playerInventory').empty();
+    console.log(player.inventory)
+    function randomItem() {
+        for(let i = 0;i<num; i++){
+            const newItem = randomTreasure.splice(Math.floor(Math.random()*randomTreasure.length-1),1);
+            console.log(newItem)
+            console.log(player.inventory)
+            player.inventory.push(newItem);
+            console.log(player.inventory);
+        }
+    }
+    randomItem();    
+    // else (player.inventory.push("The Dungeon has been sacked"))
+    $(`#playerInventory`).empty()
+    for(let i=0;i<player.inventory.length;i++){
+        const dispItem = $(`<button class=playerItem id=${i}></button>`)
+        dispItem.text(player.inventory[i])
+        $('#playerInventory').append(dispItem);
+    }
+}
 
 //listener for player
 $('body').keypress(function(e){      //controls player movement & listens for interact keys: [f q]
@@ -194,5 +227,19 @@ $('body').keydown(function(e){  //controls player attack
         player.attack("right");
     } else {}
     
+});
+
+$('#playerInventory').click(function(event){
+    const chooser = Math.floor(Math.random()*20)+1
+    if (chooser>0 && chooser<=5){
+        gameClock.second+=20;
+    }else if( chooser >5 && chooser<10){
+        player.torch++    
+    } else if (chooser>=10 && chooser<15){
+        player.speed+=10;
+    } else if (chooser>=15){
+        player.heart++
+    }
+    event.target.remove();
 });
 

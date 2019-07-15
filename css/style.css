@@ -76,6 +76,15 @@ body{
 /* .gameContent{
   background-color: rgba(255, 255, 255, 0.5);
 } */
+#instructions{
+  width: 25vw;
+}
+.instructions{
+  width: 25px;
+}
+#list-instructions{
+  list-style: none;
+}
 #timerDisplay{
   padding:0;
   font-size: .8rem;
@@ -85,7 +94,6 @@ body{
 #grid-holder0{
   box-sizing: border-box;
   background-color: lightgray;
-  min-width: 525px;
   text-align: center;
   
 }
@@ -101,7 +109,7 @@ body{
 .cell{
   width: 1.3rem; 
   height: 1.3rem;
-  border: 1px solid rgba(0,0,0,.1);
+  border: 1px solid rgba(0,0,0,0);
 }
 .door{
   background-color: lightblue;
@@ -148,13 +156,13 @@ body{
   text-align: center;
   padding: .1rem 0  ;
 }
-#divider{
+/* #divider{
   background: url('../single_border.png'); 
   background-size: contain;
   background-position: center;
   height: 2em;
   padding-bottom: 5px;
-}
+} */
 #playerHP{
   border: 0px solid black;
 }
@@ -172,34 +180,15 @@ body{
 .heartBox{
   background: url("../img/heart--v2.png");
   background-size: contain;
-  background-color: red;
+  background-color: rgba(255, 0, 0, 0.24);
   border-radius: 50%;
   margin: .1em .3em;
 }
-/* 
- .arrow-up {
 
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 1px solid black;
-  }
-  
-  .arrow-down { 
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    
-    border-top: 1px solid #f00;
-  }
-  
-  .arrow-right {
-    border-top: 6px solid transparent;
-    border-bottom: 6px solid transparent;
-    
-    border-left: 1px solid green;
-  }
-  
-  .arrow-left {  
-    border-top: 6px solid transparent;
-    border-bottom: 6px solid transparent; 
-    border-right:1px solid blue; 
-  }  */
+.speedBoots{
+  background: url("../img/runner.png");
+  background-size: contain;
+  background-color: rgba(165, 42, 42, 0.24);
+  border-radius: 50%;
+  margin: .1em .3em;
+}
