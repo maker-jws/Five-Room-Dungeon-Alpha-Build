@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=.50">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
-    <link  rel="stylesheet" href="css/style.css">
-    <title>5 Room Dungeon Generator</title>
-</head>
-<body>  
-    <div>
-    <div class="container-fluid">
-        <div class="col align-middle" id="header">
-                <div class='row justify-content-center gameContent wrapper'>
-                    <div class="nav justify-content-center playerInfo"><span id="playerName"></span></div>
-                    <div class="nav justify-content-center playerInfo" ><span id="playerHP" class="row justify-content-center playerInfo"></span></div>
-                    <div class='nav justify-content-center playerinfo' id="timerDisplay"></div>
-                    <div class="nav justify-content-center playerInfo" ><span id="playerTorch" class="row justify-content-center playerInfo"></span></div>
-                    <div class="nav justify-content-center playerInfo" ><span id="playerSpeed" class="row justify-content-center playerInfo"></span></div>
-                </div>
-                <div class='row justify-content-center gameContent' id="startButton"></div>
-                <div class="row justify-content-center gameContent" id="instructions">
-                            <div id="list-instructions" class='col'>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=.50">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            crossorigin="anonymous">
+        <link rel="stylesheet" href="css/style.css">
+        <title>5 Room Dungeon Generator</title>
+    </head>
+
+    <body>
+        <div>
+            <div class="container-fluid">
+                <div class="col align-middle" id="header">
+                    <div class='row justify-content-center gameContent wrapper'>
+                        <div class="nav justify-content-center playerInfo"><span id="playerName"></span></div>
+                        <div class="nav justify-content-center playerInfo"><span id="playerHP"
+                                class="row justify-content-center playerInfo"></span></div>
+                        <div class='nav justify-content-center playerinfo' id="timerDisplay"></div>
+                        <div class="nav justify-content-center playerInfo"><span id="playerTorch"
+                                class="row justify-content-center playerInfo"></span></div>
+                        <div class="nav justify-content-center playerInfo"><span id="playerSpeed"
+                                class="row justify-content-center playerInfo"></span></div>
+                    </div>
+                    <div class='row justify-content-center gameContent' id="startButton"></div>
+                    <div class="row justify-content-center gameContent" id="instructions">
+                        <div id="list-instructions" class='col'>
                             <div class=row>
-                                <div>Collect all of the </div> <div class="cell"></div><div class="treasure cell"></div></div>
-                                <div class="row">Avoid the monsters <div class="cell"></div>
+                                <div>Collect all of the </div>
+                                <div class="cell"></div>
+                                <div class="treasure cell"></div>
+                            </div>
+                            <div class="row">Avoid the monsters <div class="cell"></div>
                                 <div class="cell instructions" style="background-color: green"></div>
                                 <div class="cell instructions" style="background-color: brown; width: 1.3rem"></div>
                                 <div class="cell instructions" style="background-color: gray"></div>
@@ -32,43 +41,56 @@
                                 <div class="cell instructions" style="background-color: darkblue"></div>
                                 <div class="cell instructions" style="background-color: cyan"></div>
                             </div>
-                            <div class="row"><div>Escape the dungeon by finding</div><div class="cell"></div><div class="cell goal"></div></div>
+                            <div class="row">
+                                <div>Escape the dungeon by finding</div>
+                                <div class="cell"></div>
+                                <div class="cell goal"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-        </div>
-    </div>
-    <div class="container-fluid" >
-        <div class="row justify-content-center" id="game-space">
-                <div class="row justify-content-center wrapper">
-                        <div class="col" id="grid-holder0"></div>    
-                </div>    
-          </div>  
-    </div>
-    <div class="container-fluid">
-        <div class="row fixed-bottom playerInfo wrapper">
-            <div class="row"><bold>Player Inventory:</bold><span id="playerInventory"></span></div>
-        </div>
-    </div>    
-    <!-- <div class='row fixed-bottom'>
+            </div>
+            <div class="container-fluid">
+                <div class="row justify-content-center" id="game-space">
+                    <div class="row justify-content-center wrapper">
+                        <div class="col" id="grid-holder0"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row fixed-bottom playerInfo wrapper">
+                    <div class="row">
+                        <bold>Player Inventory:</bold><span id="playerInventory"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class='row fixed-bottom'>
         <div class="button btn-md playerInfo"><h5>Game Status:</h5><span id="gameMessage" >000</span></div>
         <div class="button btn-md game-info-item">Doors:<span id="doorCounter" >000</span></div>
         <div class="button btn-md game-info-item">Treasure:<span id="treasureCounter" >000</span></div>
         <div class="button btn-md game-info-item">Player Position:<span id="playerXY" >000</span></div>
         <div class="button btn-md game-info-item">Monster Names:<span id="enemyName" >000</span></div>
     </div> -->
-</div>   
-</body>
-<scrip>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    
-    <script src="JS/assets.js"></script>
-    <script src="JS/map-render.js"></script>
-    <script src="JS/player.js"></script>
-    <script src="JS/enemy.js"></script>
-    <script src="JS/app.js"></script>
-    
-</scrip>
-</body>
+        </div>
+    </body>
+    <scrip>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+        <script src="JS/assets.js"></script>
+        <script src="JS/map-render.js"></script>
+        <script src="JS/player.js"></script>
+        <script src="JS/enemy.js"></script>
+        <script src="JS/app.js"></script>
+
+    </scrip>
+    </body>
+
 </html>
