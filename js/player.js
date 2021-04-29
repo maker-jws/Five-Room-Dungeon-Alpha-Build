@@ -161,7 +161,6 @@ const player = {
         this.render('player');
     }
 }
-
 // requires #playerInventory Id. 
 function addInventoryItem(num) {
     $('#playerInventory').empty();
