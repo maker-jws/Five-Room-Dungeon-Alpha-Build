@@ -12,7 +12,6 @@ const player = {
     direction: "",
     attackdir: "",
     searching: false,
-
     checkHealth: function () {
         if (this.health <= 0) {
             endGame();
@@ -27,17 +26,6 @@ const player = {
         console.log(`${this.name} joined the game`);
         console.log(this);
     },
-
-    // function battle(attacker, attacked,mod="0"){
-    //     console.log(`${attacker} moves to attack ${attacked}`)
-    //     let attackerRolled = attackRoll(6,mod)
-    //     let attackedRolled = attackRoll(6,mod)
-    //     console.log(attackerRolled, "<<attacker",attackedRoller, "<<attacked");  
-    //     if (attackerRolled>=attackedRolled){
-    //         attacked.heart--;
-    //     }
-    // }
-
     attack(direction) { //renders an attack in the players current direction(on a delay related tied to player speed )
         const character = this
         this.attackdir == direction;
