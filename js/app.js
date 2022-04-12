@@ -20,7 +20,7 @@ function setup() {
         parseMap();
         updateGameInfo()
         createMonsters()
-        console.log(createMonsters)
+        // console.log(createMonsters)
         $(`#playerCol`).show();
         $(`#timerDisplay`).append($timerDisplay);
     });
